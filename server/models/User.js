@@ -17,7 +17,20 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    rating: Number,
+    sex: String,
+    rating: {
+        type: Number,
+        default: 0
+    },
+    telephone: {
+        type: Number,
+        required: true,
+        maxLength: 9,
+    },
+    role: {
+        type: Number,
+        default: 0,
+    },
     lastSeen: {
         type: Date,
         default: Date.now()
@@ -25,4 +38,4 @@ const UserSchema = mongoose.Schema({
 })
 
 const User = mongoose.model("User", UserSchema);
-module.exports = User;
+export default User
