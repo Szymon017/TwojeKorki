@@ -1,24 +1,41 @@
 import React from "react";
 import {Table} from "react-bootstrap";
+import PropTypes from 'prop-types';
 
-export const AnnouncementTable = () => {
+
+export const AnnouncementTable = ({announcements}) => {
     return <Table>
         <thead>
             <tr>
                 <th>#</th>
                 <th>Przedmiot</th>
-                <th>Ogłaszajacy</th>
-                <th>Data</th>
+                <th>Opis</th>
+                <th>Lokalizacja</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Matematyka</td>
-                <td>Jan Kowalski</td>
-                <td>05-10-2022</td>
+            {announcements.length ? (
+            announcements.map((row)=>(
+            <tr key={row.id}>
+                <td>{row.id}</td>
+                <td>{row.subject}</td>
+                <td>{row.description}</td>
+                <td>{row.location}</td>
             </tr>
+            ))) : (
+            <tr>
+                <td colSpan={4} className="text-center">
+                    No announcement too show{" "}
+                </td>
+                
+            </tr>
+            )   
+            }
         </tbody>
     </Table>
     
 }
+
+AnnouncementTable.propTypes = {
+    announcements: PropTypes.array.isRequired,
+};
