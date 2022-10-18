@@ -1,10 +1,11 @@
 import express from "express";
 const router = express.Router();
 import {getAllUsers, getUserById, addUser, deleteAllUsers, deleteOneUser} from '../controllers/usersController.js';
+import  userValidator  from "../validators/userValidator.js";
 
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);
-router.post('/', addUser);
+router.post('/', userValidator, addUser);
 router.delete('/', deleteAllUsers);
 router.delete('/', deleteOneUser);
 
