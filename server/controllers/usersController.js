@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import User from '../models/User.js';
+import bcrypt from 'bcrypt';
+
 const getAllUsers = (req, res) => {
     res.status(200).json({ message: "Get all users" });
 }
@@ -13,7 +15,8 @@ const addUser = async (req, res) => {
     try {
       const user = await User.findOne({ email });
       const phoneNumber = await User.findOne({telephone});
-
+      
+      //checking for duplicates phone and email
       if (user) {
         return res.status(400).json({ message: 'User email already exists' });
       }
@@ -36,8 +39,15 @@ const deleteAllUsers = (req, res) => {
     res.status(200).json({ message: "Deleted all users" });
 }
 
-const deleteOneUser = (req, res) => {
-    res.status(200).json({ message: "Deleted one user" })
+const deleteOneUser = async(req, res) => {
+    const _id = req.params.id;
+    try{
+      const result = User.findOneAndDelete(_id).exec();
+      res.send({message: `User deleted`})
+    }catch(error){
+      res.send(error)
+    }
+
 }
 export {
     getAllUsers,
