@@ -5,10 +5,10 @@ import { Header } from "./partials/Header.comp";
 export const DefaultLayout = ({children}) => {
     return (
         
-            <div className="default-layout">
-                <div className="header mb-2">
+            <div>
+                <header className="header mb-2">
                 <Header/>
-                </div>
+                </header>
 
                 <main className="main">
                     {children}
