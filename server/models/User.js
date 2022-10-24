@@ -31,6 +31,8 @@ const UserSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    announcements:[],
+    friends:[],
     lastSeen: {
         type: Date,
         default: Date.now()
