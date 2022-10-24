@@ -11,11 +11,11 @@ export const SearchForm = ({handleOnchange, str}) => {
             <Form>
                 <Form.Group as = {Row}>
                     <Form.Label column sm="3">
-                        Search:{" "}
+                         Szukaj:{" "}
                     </Form.Label>
                     <Col sm="9">
                         <Form.Control name="searchStr"
-                            placeholder = "Search.."
+                            placeholder = "Wyszukaj.."
                             onChange={handleOnchange}
                             value={str}
                             />

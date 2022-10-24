@@ -6,13 +6,21 @@ import { shortText } from "../../utils/validation";
 
 
 const initialFrmDt = {
-    subject: "",
-    issueDate: "",
+    author: "",
+    title: "",
+    category: "",
+    price: "",
+    announceAs: "",
+    dateTo: "",
     description: "",
 };
 const initialFrmError = {
-    subject: false,
-    issueDate: false,
+    author: false,
+    title: false,
+    category: false,
+    price: false,
+    announceAs: false,
+    dateTo: false,
     description: false,
 };
 
@@ -59,7 +67,7 @@ export const AddAnnoucement = () => {
         <Container>
             <Row>
                 <Col>
-                <PageBreadcrumb page="New Announcement" />
+                <PageBreadcrumb page="Dodaj ogłoszenie" />
                 </Col>
             </Row>
             

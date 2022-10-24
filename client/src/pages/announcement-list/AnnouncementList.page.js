@@ -34,7 +34,7 @@ export const AnnouncementLists = () => {
         <Container>
             <Row>
                 <Col>
-                    <PageBreadcrumb page="Announcement List"/>
+                    <PageBreadcrumb page="Lista ogłoszeń"/>
                     
                        
                 </Col>
@@ -42,7 +42,7 @@ export const AnnouncementLists = () => {
 
             <Row className="mt-4">
                 <Col>
-                    <Button variant="info">Add New Announcement </Button>
+                    <Button variant="info">Dodaj nowe ogłoszenie </Button>
                     
                        
                 </Col>

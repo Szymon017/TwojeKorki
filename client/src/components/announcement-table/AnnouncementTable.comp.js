@@ -25,7 +25,7 @@ export const AnnouncementTable = ({announcements}) => {
             ))) : (
             <tr>
                 <td colSpan={4} className="text-center">
-                    No announcement too show{" "}
+                    Brak ogłoszeń do pokazania!{" "}
                 </td>
                 
             </tr>
