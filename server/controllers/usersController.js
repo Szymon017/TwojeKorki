@@ -84,21 +84,21 @@ const deleteUser = async (req, res) => {
   }
 }
 
-const updateUser = async(req, res) => {
-    try{
-      const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+const updateUser = async (req, res) => {
+  try {
+    const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
-      });
-      res.status(200).json({
-        status: 'Succesfully updated an user',
-        data: newUser
-      })
-    }catch(error){
-      res.staus(500).json({
-        status: 'Failed to update an user',
-        message: error
-      });
-    }
+    });
+    res.status(200).json({
+      status: 'Succesfully updated an user',
+      data: newUser
+    })
+  } catch (error) {
+    res.staus(500).json({
+      status: 'Failed to update an user',
+      message: error
+    });
+  }
 }
 
 export {

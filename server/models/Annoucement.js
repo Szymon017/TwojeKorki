@@ -12,7 +12,7 @@ const AnnoucementSchema = mongoose.Schema({
         required: true
     },
     author: {
-        type: User,
+        type: String,
         required: true
     },
     price:{

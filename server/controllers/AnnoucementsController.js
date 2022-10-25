@@ -1,8 +1,11 @@
 import Annoucement from "../models/Annoucement.js";
 
 const getAllAnnoucements = async (req, res) => {
+    const page = req.query.p || 0; 
+    const annoucementsPerPage = 15;
+
     try {
-        const annoucements = await Annoucement.find({});
+        const annoucements = await Annoucement.find({}).skip(page*annoucementsPerPage).limit(annoucementsPerPage);
         res.status(200).json({
             status: 'Successfully got an annoucement',
             results: annoucements.length,
