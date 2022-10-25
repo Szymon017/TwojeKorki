@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import User from "./User";
+import User from "./User.js";
+
 
 const AnnoucementSchema = mongoose.Schema({
     title: {
@@ -15,7 +16,7 @@ const AnnoucementSchema = mongoose.Schema({
         required: true
     },
     price:{
-        type: Float,
+        type: Number,
         required: true
     },
     category: {
