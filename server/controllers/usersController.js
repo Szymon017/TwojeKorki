@@ -6,9 +6,12 @@ const getAllUsers = async (req, res) => {
   if(req.query.firstName){
     match.firstName = req.query.firstName;
   }
+  if(req.query.lastName){
+    match.lastName = req.query.lastName;
+  }
   console.log(match);
   try {
-    const users = await User.find(match);
+    const users = await User.find(match).populate("friends");
     res.status(200).json({
       status: 'success',
       results: users.length,

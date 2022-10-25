@@ -32,7 +32,10 @@ const UserSchema = mongoose.Schema({
         default: 0,
     },
     announcements:[],
-    friends:[],
+    friends:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
     lastSeen: {
         type: Date,
         default: Date.now()
