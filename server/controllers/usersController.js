@@ -2,8 +2,13 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 
 const getAllUsers = async (req, res) => {
+  const match = {};
+  if(req.query.firstName){
+    match.firstName = req.query.firstName;
+  }
+  console.log(match);
   try {
-    const users = await User.find();
+    const users = await User.find(match);
     res.status(200).json({
       status: 'success',
       results: users.length,
