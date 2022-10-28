@@ -34,7 +34,7 @@ const getAnnoucementById = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: "Failed to get an annoucement",
-            message: error
+            message: error.message
         })
     }
 }
@@ -60,7 +60,8 @@ const addNewAnnoucement = async (req, res) => {
 
 const deleteAnnoucement = async (req, res) => {
     try {
-        const result = await Annoucement.findOneAndDelete({_id: req.params.id})
+        const result = await Annoucement.findByIdAndDelete({_id: req.params.id})
+        if(!result) throw Error("No annoucement found!")
         res.status(201).json({
             status: 'Successfully deleted annoucement',
             data: null
@@ -68,7 +69,7 @@ const deleteAnnoucement = async (req, res) => {
     } catch (error) {
         res.status(409).json({
             status: 'Failed to delete an annoucement',
-            message: error
+            message: error.message
         });
     }
 }
@@ -78,6 +79,7 @@ const updateAnnoucement = async (req, res) => {
         const newAnnoucement = await Annoucement.findByIdAndUpdate(req.params.id, req.body, {
             new:true
         });
+        if(!newAnnoucement) throw Error("No annoucement found!")
         res.status(200).json({
             status: 'Succesfully updated an annoucement',
             data: newAnnoucement

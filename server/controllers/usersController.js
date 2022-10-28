@@ -80,6 +80,8 @@ const addUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const result = await User.findOneAndDelete({ _id: req.params.id });
+    if(!result) throw Error("No user found!");
+
     res.status(201).json({
       status: 'Successfully deleted user',
       data: null
@@ -97,6 +99,7 @@ const updateUser = async (req, res) => {
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
+    if(!newUser) throw Error("No user found!");
     res.status(200).json({
       status: 'Succesfully updated an user',
       data: newUser
