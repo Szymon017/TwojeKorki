@@ -1,18 +1,25 @@
 {
-  "name": "server",
+  "name": "js-jwt-auth-mongodb",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
+  "description": "Node.js + MongoDB: JWT Authentication & Authorization",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "authentication",
+    "mongodb"
+  ],
+  "author": "Mateuszi9",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mongoose": "^6.6.5",
-    "nodemon": "^2.0.20"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.0"
   }
 }
