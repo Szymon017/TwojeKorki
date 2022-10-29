@@ -1,24 +1,38 @@
-.default-layout{
-    display: grid;
-    grid-template-rows: 80px auto 3rem;
-    grid-template-areas: 
-    "header"
-    "main"
-    "footer"
+.App {
+  text-align: center;
 }
 
-header {
-    grid-area: header;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-main{
-    grid-area: main;
-    min-height: 88vh;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-footer{
-    grid-area: footer;
-    background: black;
-    padding: 1rem;
-    color: white;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

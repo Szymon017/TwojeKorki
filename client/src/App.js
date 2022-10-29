@@ -1,25 +1,25 @@
-import React from 'react'
-import { DefaultLayout } from './layout/DefaultLayout';
-//import { Dashboard } from './pages/dashboard/Dashboard.page';
+import logo from './logo.svg';
 import './App.css';
-//import {Entry} from './pages/entry/Entry.page';
-//import { AnnouncementLists } from './pages/announcement-list/AnnouncementList.page';
-import {AddAnnoucement} from './pages/new-announcement/AddAnnouncement.page';
 
 function App() {
   return (
-    <div>
-    {/*<Entry/>*/}
-
-
-    <DefaultLayout>
-        {/*<Dashboard/>*/}
-        <AddAnnoucement/>
-        {/*<AnnouncementLists/>*/}
-    </DefaultLayout>
-
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
