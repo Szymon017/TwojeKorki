@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const getAllUsers = async (req, res) => {
   const match = {};
@@ -65,14 +66,16 @@ const addUser = async (req, res) => {
     const newUser = await User.create({
       email, password: hashed_password, firstName, lastName, sex, rating, telephone, role, lastSeen
     });
+    const token = createToken(newUser._id);
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000});
     res.status(200).json({
-      status: 'Successfully registered new user',
+      status: 'Successfully registered user',
       data: newUser
     });
   } catch (error) {
     res.status(500).json({
       status: 'Failed to register new user',
-      message: error
+      message: error.message
     })
   }
 }
@@ -110,6 +113,12 @@ const updateUser = async (req, res) => {
       message: error
     });
   }
+}
+const maxAge = 3*24*60*60;
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: maxAge
+  });
 }
 
 export {
