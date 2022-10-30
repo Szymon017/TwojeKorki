@@ -1,0 +1,17 @@
+.registerContainer{
+    width:400px;
+    margin: auto;
+    background-color: rgb(247, 247, 247);
+    padding: 4%;
+    border-radius: 5%;
+    box-shadow: 
+}
+
+.registerLogo{
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
