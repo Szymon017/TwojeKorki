@@ -39,7 +39,6 @@ export default function Register() {
     }
 
     useEffect(() => {
-        console.log(error);
         if (Object.keys(error).length===0 && isSubmit) {
             try{
                 const result = addUser(user);   

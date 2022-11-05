@@ -2,6 +2,7 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.TOKEN_SECRET, {
@@ -16,6 +17,9 @@ const getAllUsers = async (req, res) => {
   }
   if(req.query.lastName){
     match.lastName = req.query.lastName;
+  }
+  if(req.query.email){
+    match.email = req.query.email;
   }
   console.log(match);
   try {
@@ -71,7 +75,10 @@ const addUser = async (req, res) => {
       })
     }
     else if (phoneNumber) {
-      return res.status(400).json({ message: "Phone number already exists" })
+      return res.status(400).json({
+        status: 'Failed to register new user',
+        message: 'Phone number already exists'
+        })
     }
 
     const newUser = await User.create({
@@ -81,12 +88,12 @@ const addUser = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000})
     res.status(200).json({
       status: 'Successfully registered new user',
-      data: newUser._id
+      message: newUser._id
     });
   } catch (error) {
     res.status(500).json({
       status: 'Failed to register new user',
-      message: error.message
+      message: error
     })
   }
 }
@@ -119,11 +126,31 @@ const updateUser = async (req, res) => {
       data: newUser
     })
   } catch (error) {
-    res.staus(500).json({
+    res.status(500).json({
       status: 'Failed to update an user',
       message: error
     });
   }
+}
+
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000})
+    res.status(200).json({ 
+      status: "Logged in",
+      message: user
+     });
+  } catch (err) {
+    res.status(400).json({
+      status: "Błąd poczas logowania",
+      message: err.message
+    });
+  }
+
 }
 
 export {
@@ -131,5 +158,6 @@ export {
   getUserById,
   addUser,
   deleteUser,
-  updateUser
+  updateUser,
+  login
 }
