@@ -57,43 +57,41 @@ const getUserById = async (req, res) => {
   }
 }
 
-const addUser = async (req, res) => {
-  const { email, password, firstName, lastName, sex, rating, telephone, role, lastSeen } = req.body;
-  console.log(req.body);
-  const salt = await bcrypt.genSalt(10);
-  const hashed_password = await bcrypt.hash(password, salt);
+const login = async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    //checking for duplicated phone or email
-    const user = await User.findOne({ email });
-    const phoneNumber = await User.findOne({ telephone });
-
-    if (user) {
-      return res.status(500).json({
-        status: 'Failed to register new user',
-        message: error.message
-      })
-    }
-    else if (phoneNumber) {
-      return res.status(400).json({
-        status: 'Failed to register new user',
-        message: 'Phone number already exists'
-        })
-    }
-
-    const newUser = await User.create({
-      email, password: hashed_password, firstName, lastName, sex, rating, telephone, role, lastSeen
-    });
-    const token = createToken(newUser._id);
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000})
-    res.status(200).json({
-      status: 'Successfully registered new user',
-      message: newUser._id
+    res.status(200).json({ 
+      status: "Logged in",
+      message: user
+     });
+  } catch (err) {
+    res.status(400).json({
+      status: "Błąd poczas logowania",
+      message: err.message
     });
+  }
+}
+
+const signupUser = async (req, res) => {
+  const { email, password, firstName, lastName, sex, rating, telephone, role, lastSeen } = req.body;
+
+  try {
+    const user = await User.signup(email, password, firstName, lastName, sex, rating, telephone, role)
+
+    const token = createToken(user._id);
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+    res.status(200).json({
+      message: "Account created"
+    })
+    
   } catch (error) {
     res.status(500).json({
-      status: 'Failed to register new user',
-      message: error
+      error: error.message,
+      name: error.name
     })
   }
 }
@@ -133,31 +131,13 @@ const updateUser = async (req, res) => {
   }
 }
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
 
-  try {
-    const user = await User.login(email, password);
-    const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000})
-    res.status(200).json({ 
-      status: "Logged in",
-      message: user
-     });
-  } catch (err) {
-    res.status(400).json({
-      status: "Błąd poczas logowania",
-      message: err.message
-    });
-  }
-
-}
 
 export {
   getAllUsers,
   getUserById,
-  addUser,
   deleteUser,
   updateUser,
+  signupUser,
   login
 }

@@ -27,7 +27,6 @@ export default function Login() {
     const handleSubmit = async(event) => {
         event.preventDefault();
         const result = await login(user);
-        
         if (result.data) {
             window.location.assign('/');
         }else{

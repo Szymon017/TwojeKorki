@@ -4,7 +4,7 @@ export const addUser = async (user) => {
     try{
         return await axios.post(`http://localhost:5000/users`, user)
     }catch(err){
-        return err.response.data.message;
+        return err.response.data;
     }
 }
 
