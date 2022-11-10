@@ -63,14 +63,14 @@ const login = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge*1000})
     res.status(200).json({ 
-      status: "Logged in",
+      status: "Zalogowano do systemu",
+      token: token,
       message: user
      });
   } catch (err) {
     res.status(400).json({
-      status: "Błąd poczas logowania",
+      status: "Błąd podczas logowania",
       message: err.message
     });
   }
@@ -131,7 +131,41 @@ const updateUser = async (req, res) => {
   }
 }
 
+const getProfile = async(req, res) => {
+  try{
+    const user = await User.findById(req.user.id)
+    console.log(user);
+    res.json({
+      id: user.id,
+      name: user.firstName
+    })
+  }catch(err){
+    console.log(err);
+  }
+}
 
+const tokenIsValid = async(req, res) => {
+  try{
+    const token = req.header('auth-token');
+    if(!token){
+      return res.json(false)
+    }
+
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET)
+    if(!verified){
+      return res.json(false);
+    }
+
+    const user = await User.findById(verified.id);
+    if(!user){
+      return res.json(false);
+    }
+
+    return res.json(true)
+  }catch(err){
+    res.status(500).json({message: err})
+  }
+}
 
 export {
   getAllUsers,
@@ -139,5 +173,7 @@ export {
   deleteUser,
   updateUser,
   signupUser,
-  login
+  login,
+  getProfile,
+  tokenIsValid
 }

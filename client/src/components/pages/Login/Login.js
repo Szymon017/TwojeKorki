@@ -1,7 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useState, useEffect } from 'react';
-import { isEmail } from "validator";
+import { useState, useEffect, useContext } from 'react';
 import './style.css';
 import { login } from '../../../service/userService';
 
@@ -27,11 +26,15 @@ export default function Login() {
     const handleSubmit = async(event) => {
         event.preventDefault();
         const result = await login(user);
-        if (result.data) {
+        if(result.data){
+            localStorage.setItem("user", JSON.stringify(result.data));
+            localStorage.setItem("token", result.data.token)
             window.location.assign('/');
         }else{
-            setError({error: result.message})
+            setError({error: result.message});
         }
+        
+        
     }
 
     return <>
