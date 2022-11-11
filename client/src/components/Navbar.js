@@ -7,22 +7,22 @@ export default function Navbar() {
         TwojeKorki
       </Link>
       <ul>
-        <CustomLink to="add-annoucement">Dodaj ogłoszenie</CustomLink>
-        <CustomLink to="all-annoucements">Ogłoszenia</CustomLink>  
+        <CustomLink to="/annoucements/add">Dodaj ogłoszenie</CustomLink>
+        <CustomLink to="">Ogłoszenia</CustomLink>
         <CustomLink to="logout">Wyloguj się</CustomLink>
       </ul>
     </nav>
   );
 }
 
-function CustomLink({ to, children, ...props}){
+function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true})
-  return(
-    <li className={isActive ? "active" : ""}>
-    <Link to={to} {...props}>
-      {children}
-    </Link>
-  </li>
-  )
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+  return (
+    <li className={isActive ? 'active' : ''}>
+      <Link to={to} {...props}>
+        {children}
+      </Link>
+    </li>
+  );
 }
