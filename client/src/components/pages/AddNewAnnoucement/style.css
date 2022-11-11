@@ -1,0 +1,8 @@
+.addAContainer{
+    
+    margin: auto;
+    background-color: rgb(247, 247, 247);
+    padding: 4%;
+    border-radius: 5%;
+    margin-top: 3rem;
+}

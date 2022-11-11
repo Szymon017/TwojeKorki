@@ -7,6 +7,7 @@ import Register from "./components/pages/Register/Register";
 import Login from "./components/pages/Login/Login";
 import { useState, useMemo, useEffect, createContext } from "react";
 import { getProfile, tokenIsValid } from './service/userService.js'
+import UserProfile from "./components/pages/UserProfile/UserProfile";
 
 export const UserContext = createContext();
 function App() {
@@ -52,6 +53,7 @@ function App() {
                     <Route path='/annoucements/add' element={<AddNewAnnoucement />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/userProfile' element={<UserProfile/>} />
                 </Routes>
             </div>
         </UserContext.Provider>

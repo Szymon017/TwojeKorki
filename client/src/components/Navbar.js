@@ -7,8 +7,9 @@ export default function Navbar() {
         TwojeKorki
       </Link>
       <ul>
-        <CustomLink to="annoucements/add">Dodaj ogłoszenie</CustomLink>
-        <CustomLink to="annoucements">Ogłoszenia</CustomLink>  
+        <CustomLink to="/annoucements/add">Dodaj ogłoszenie</CustomLink>
+        <CustomLink to="/annoucements">Ogłoszenia</CustomLink>  
+        <CustomLink to="/userProfile">Mój profil</CustomLink>
         <CustomLink to="logout">Wyloguj się</CustomLink>
       </ul>
     </nav>

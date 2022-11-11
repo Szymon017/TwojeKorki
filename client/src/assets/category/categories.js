@@ -1,0 +1,18 @@
+export default [
+  'Język angielski',
+  'Matematyka',
+  'Chemia',
+  'Język niemiecki',
+  'Język polski',
+  'Fizyka',
+  'Język francuski',
+  'Biologia',
+  'Język rosyjski',
+  'Język hiszpański',
+  'Historia',
+  'Język włoski',
+  'Informatyka',
+  'Wos',
+  'Geografia',
+  'Inne',
+];
