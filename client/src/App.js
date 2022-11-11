@@ -45,7 +45,10 @@ function App() {
 
     return <>
         <UserContext.Provider value={{ userData, setUserData }}>
+            <header>  
             <Navbar />
+            </header>
+            <main>
             <div className='container'>
                 <Routes>
                     <Route path='/' element={<Home />} />
@@ -56,6 +59,8 @@ function App() {
                     <Route path='/userProfile' element={<UserProfile/>} />
                 </Routes>
             </div>
+            </main>
+            <footer><div className="text-center">All rights reserved</div></footer>
         </UserContext.Provider>
     </>
 }
