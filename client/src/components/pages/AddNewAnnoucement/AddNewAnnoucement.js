@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import './style.css';
-import { AddAnnoucement } from '../../../service/announcementService';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Typeahead } from 'react-bootstrap-typeahead';
@@ -11,7 +10,18 @@ import categories from '../../../assets/category/categories';
 
 
 export default function AddNewAnnoucement() {
-  const [form, setForm] = useState({});
+  const initialState = {
+    userID: '',
+    title: '',
+    option: '',
+    category: '',
+    location: '',
+    description: '',
+    price: 0,
+    date: Date.now(),
+  };
+
+  const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
 
   const setField = (field, value) => {
@@ -28,7 +38,7 @@ export default function AddNewAnnoucement() {
   };
 
   const validateForm = () => {
-    const { title, option, category, description, price } = form;
+    const { title, option, category, location, description, price } = form;
     const newErrors = {};
 
     if (!title || title === '') newErrors.title = 'Proszę wprowadź tytuł';
@@ -39,13 +49,15 @@ export default function AddNewAnnoucement() {
     if (!category || category === '')
       newErrors.category = 'Proszę wybierz kategorie';
 
+    if (!location || location === '')
+      newErrors.location = 'Proszę podaj lokalizację';
     if (!description || description === '')
       newErrors.description = 'Proszę wprowadź opis ogłoszenia';
     else if (description.length > 230)
       newErrors.description = 'Opis jest za długi (max 230 znaków)';
 
     if (!price || price === '') newErrors.price = 'Wprowadź cene';
-
+    else if (price < 1) newErrors.price = 'Cena musi byc wieksza od zera';
     return newErrors;
   };
 
@@ -59,11 +71,18 @@ export default function AddNewAnnoucement() {
       console.log('form submitted');
       console.log(form);
       
+      fetch('http://localhost:3000/annoucements/add', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(form)
+      }).then(() => {
+        console.log('new annoucement`s just added')
+      })
     }
   };
-
+  
   return (
-    <div>
+    <div className='addAnnContainer'>
       <h1 className="my-3">Dodaj Ogłoszenie</h1>
       <Container>
         <Form>
@@ -102,8 +121,8 @@ export default function AddNewAnnoucement() {
                 }}
               >
                 <option>Wybierz opcje...</option>
-                <option value="T">Korepetytor</option>
-                <option value="S">Uczeń</option>
+                <option value="Teacher">Korepetytor</option>
+                <option value="Student">Uczeń</option>
               </Form.Select>
               <Form.Control.Feedback type="invalid">
                 {errors.option}
@@ -130,6 +149,26 @@ export default function AddNewAnnoucement() {
                 options={categories}
               />
               <div className="red">{errors.category}</div>
+            </Col>
+          </Form.Group>
+
+          {/*Lokalizacja */}
+          <Form.Group as={Row} className="mb-3" controlId="location">
+            <Form.Label column sm={3}>
+              Lokalizacja:
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="text"
+                placeholder="Podaj miasto"
+                name="location"
+                value={form.location}
+                onChange={(e) => setField('location', e.target.value)}
+                isInvalid={!!errors.location}
+              ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.location}
+              </Form.Control.Feedback>
             </Col>
           </Form.Group>
 
