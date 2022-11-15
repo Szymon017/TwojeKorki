@@ -28,6 +28,7 @@ export default function Login() {
         event.preventDefault();
         const result = await login(user);
         if (result.data) {
+            localStorage.setItem("token", result.data.token)
             window.location.assign('/');
         }else{
             setError({error: result.message})
