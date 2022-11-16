@@ -31,22 +31,22 @@ export default function Navbar() {
       </Link>
       <ul>
         {user ? <CustomLink to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
-        {user ? <CustomLink to="annoucements">Ogłoszenia</CustomLink> : ''}
-        {user ? <CustomLink to="profile">Mój profil</CustomLink>:''}
+        {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
+        {user ? <CustomLink to="/userProfile">Mój profil</CustomLink>:''}
         {user ? <CustomLink to="logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
       </ul>
     </nav>
   );
 }
 
-function CustomLink({ to, children, ...props}){
+function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true})
-  return(
-    <li className={isActive ? "active" : ""}>
-    <Link to={to} {...props}>
-      {children}
-    </Link>
-  </li>
-  )
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+  return (
+    <li className={isActive ? 'active' : ''}>
+      <Link to={to} {...props}>
+        {children}
+      </Link>
+    </li>
+  );
 }
