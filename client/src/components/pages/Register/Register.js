@@ -39,14 +39,14 @@ export default function Register() {
     }
 
     useEffect(() => {
-        if (Object.keys(error).length === 0 && isSubmit) {
-            
+        if (Object.keys(error).length === 0 && isSubmit) {    
             const result = addUser(user);
-            
             result.then((res) => {
                 console.log(res);
                 if(res.error){
                     setError({ ...error, [res.name]: res.error})
+                }else{
+                    window.location.assign('/');
                 }
                 
             })
