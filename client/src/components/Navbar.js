@@ -30,8 +30,9 @@ export default function Navbar() {
         TwojeKorki
       </Link>
       <ul>
-        {user ? <CustomLink to="add-annoucement">Dodaj ogłoszenie</CustomLink> : ''}
-        {user ? <CustomLink to="all-annoucements">Ogłoszenia</CustomLink> : ''}
+        {user ? <CustomLink to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
+        {user ? <CustomLink to="annoucements">Ogłoszenia</CustomLink> : ''}
+        {user ? <CustomLink to="profile">Mój profil</CustomLink>:''}
         {user ? <CustomLink to="logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
       </ul>
     </nav>

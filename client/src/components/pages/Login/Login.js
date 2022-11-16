@@ -1,7 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
-import { isEmail } from "validator";
 import './style.css';
 import { login } from '../../../service/userService';
 
