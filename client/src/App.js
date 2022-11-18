@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar';
+import Navbar1 from './components/Navbar1';
 import AddNewAnnoucement from './components/pages/AddNewAnnoucement/AddNewAnnoucement';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
@@ -6,12 +6,14 @@ import Annoucements from './components/pages/Annoucements/Annoucements';
 import Register from './components/pages/Register/Register';
 import Login from './components/pages/Login/Login';
 import UserProfile from './components/pages/UserProfile/UserProfile';
+import EditUserProfile from './components/pages/UserProfile/EditUserProfile';
+import Annouce from './components/pages/Announce-info/Announce.js';
 
 function App() {
   return (
-    <>
+    <div className="d-flex flex-column site-container">
       <header>
-        <Navbar />
+        <Navbar1 />
       </header>
       <main>
         <div className="container mt-3">
@@ -22,13 +24,15 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/userProfile" element={<UserProfile />} />
+            <Route path="/userProfile/edit" element={<EditUserProfile />} />
+            <Route path="/announcement/:title" element={<Annouce />} />
           </Routes>
         </div>
       </main>
       <footer>
         <div className="text-center">All rights reserved</div>
       </footer>
-    </>
+    </div>
   );
 }
 
