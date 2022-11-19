@@ -6,35 +6,44 @@ import Button from 'react-bootstrap/Button';
 import img from '../../../assets/images/a1.jpg';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import './style.css';
 
 export default function UserProfile() {
- 
+  
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const decoded = jwt_decode(localStorage.getItem("token"));
+    console.log(decoded); 
+    setUser(decoded.id)
+  },[])
 
   return (
     <div>
-      <h1 className="my-3">Profil użytkownika</h1>
+      <h1 className="my-3">Profil użytkownika {user.firstName}</h1>
       <Container className=" my-5 justify-content-center">
         <Row>
-          <Col md={4}>
+          {/* Leftbar*/}
+          <Col md={4} className='profileLeftPanel'>
             <Row>
-              {' '}
-              <img src={img}></img>
+              <img src={img} className='profilePhoto'></img>
             </Row>
             <Row className="my-3">
-              <Link to="/edit">
-                <Button>Edytuj profil</Button>
-              </Link>
+                <h2>{user.firstName+" "+user.lastName}</h2>
+                <h5>{user.email}</h5>
+                <h5>{user.telephone}</h5>
+                <button>Edytuj dane</button>
             </Row>
           </Col>
-          <Col md={8}>
+          {/* middle + rightbar*/}
+          <Col md={7} className='profileMiddlePanel'>
             <Row>
-              <h1>Imie nazwisko</h1>
+              <h2>Uzytkownik nie zamieścił o sobie zadnych informacji</h2>
             </Row>
+
             <Row>
-              <h5>Email</h5>
-            </Row>
-            <Row>
-              <h5>Nr tel</h5>
+              
             </Row>
 
             <Row></Row>
