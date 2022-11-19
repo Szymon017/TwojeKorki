@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import './style.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Typeahead } from 'react-bootstrap-typeahead';
-import categories from '../../../assets/category/categories';
-import { addAnnouncement } from '../../../service/announcementService';
-import { getCurrentUser } from '../../../service/userDataService';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import "./style.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Typeahead } from "react-bootstrap-typeahead";
+import categories from "../../../assets/category/categories";
+import { addAnnouncement } from "../../../service/announcementService";
+import { getCurrentUser } from "../../../service/userDataService";
 
 export default function AddNewAnnoucement() {
   const initialState = {
-    author: '',
-    title: '',
-    option: '',
-    category: '',
-    location: '',
-    description: '',
+    author: "",
+    title: "",
+    option: "",
+    category: "",
+    location: "",
+    description: "",
     price: 0,
     date: Date.now(),
   };
@@ -42,23 +42,23 @@ export default function AddNewAnnoucement() {
     const { title, option, category, location, description, price } = form;
     const newErrors = {};
 
-    if (!title || title === '') newErrors.title = 'Proszę wprowadź tytuł';
+    if (!title || title === "") newErrors.title = "Proszę wprowadź tytuł";
 
-    if (!option || option === 'Wybierz opcje...')
-      newErrors.option = 'Proszę wybierz jedną z opcji';
+    if (!option || option === "Wybierz opcje...")
+      newErrors.option = "Proszę wybierz jedną z opcji";
 
-    if (!category || category === '')
-      newErrors.category = 'Proszę wybierz kategorie';
+    if (!category || category === "")
+      newErrors.category = "Proszę wybierz kategorie";
 
-    if (!location || location === '')
-      newErrors.location = 'Proszę podaj lokalizację';
-    if (!description || description === '')
-      newErrors.description = 'Proszę wprowadź opis ogłoszenia';
+    if (!location || location === "")
+      newErrors.location = "Proszę podaj lokalizację";
+    if (!description || description === "")
+      newErrors.description = "Proszę wprowadź opis ogłoszenia";
     else if (description.length > 230)
-      newErrors.description = 'Opis jest za długi (max 230 znaków)';
+      newErrors.description = "Opis jest za długi (max 230 znaków)";
 
-    if (!price || price === '') newErrors.price = 'Wprowadź cene';
-    else if (price < 1) newErrors.price = 'Cena musi byc wieksza od zera';
+    if (!price || price === "") newErrors.price = "Wprowadź cene";
+    else if (price < 1) newErrors.price = "Cena musi byc wieksza od zera";
     return newErrors;
   };
 
@@ -69,15 +69,25 @@ export default function AddNewAnnoucement() {
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
     } else {
-      console.log('form submitted');
+      console.log("form submitted");
       const user = getCurrentUser();
       form.author = user._id;
-      addAnnouncement(form);
+      const result = addAnnouncement(form);
+      result.then((res) => {
+        console.log(res);
+        if(res.error){
+            console.log(res.error);
+        }else{
+          window.location.assign("/annoucements");
+        }
+        
+    })
+
     }
   };
-  
+
   return (
-    <div className='addAnnContainer'>
+    <div className="addAnnContainer">
       <h1 className="my-3">Dodaj Ogłoszenie</h1>
       <Container>
         <Form>
@@ -92,7 +102,7 @@ export default function AddNewAnnoucement() {
                 placeholder="Twój tytuł"
                 name="title"
                 value={form.title}
-                onChange={(e) => setField('title', e.target.value)}
+                onChange={(e) => setField("title", e.target.value)}
                 isInvalid={!!errors.title}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
@@ -112,7 +122,7 @@ export default function AddNewAnnoucement() {
                 isInvalid={!!errors.option}
                 placeholder="Dodaje jako"
                 onChange={(e) => {
-                  setField('option', e.target.value);
+                  setField("option", e.target.value);
                 }}
               >
                 <option>Wybierz opcje...</option>
@@ -135,10 +145,10 @@ export default function AddNewAnnoucement() {
                 name="category"
                 onChange={(selected) => {
                   console.log(selected);
-                  console.log('get value out', selected[0]);
-                  setField('category', selected && selected[0]);
+                  console.log("get value out", selected[0]);
+                  setField("category", selected && selected[0]);
                 }}
-                className={!!errors.category && 'red-border'}
+                className={!!errors.category && "red-border"}
                 inputProps={{ required: true }}
                 placeholder="Wybierz kategorie..."
                 options={categories}
@@ -158,7 +168,7 @@ export default function AddNewAnnoucement() {
                 placeholder="Podaj miasto"
                 name="location"
                 value={form.location}
-                onChange={(e) => setField('location', e.target.value)}
+                onChange={(e) => setField("location", e.target.value)}
                 isInvalid={!!errors.location}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
@@ -178,7 +188,7 @@ export default function AddNewAnnoucement() {
               name="description"
               value={form.description}
               isInvalid={!!errors.description}
-              onChange={(e) => setField('description', e.target.value)}
+              onChange={(e) => setField("description", e.target.value)}
             />
             <Form.Control.Feedback type="invalid">
               {errors.description}
@@ -197,7 +207,7 @@ export default function AddNewAnnoucement() {
                 name="price"
                 value={form.price}
                 isInvalid={!!errors.price}
-                onChange={(e) => setField('price', e.target.value)}
+                onChange={(e) => setField("price", e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.price}

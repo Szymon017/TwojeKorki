@@ -7,3 +7,11 @@ export const addAnnouncement= async (form) => {
     return err.response.data;
   }
 };
+
+export const getAnnoucements = async() => {
+  try{
+    return await axios.get(`http://localhost:5000/annoucements`)
+  }catch(err){
+    return err.response.data;
+  }
+}
