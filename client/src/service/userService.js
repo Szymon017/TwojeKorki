@@ -16,5 +16,13 @@ export const login = async (user) => {
     }
 }
 
+export const getUserAnnoucements = async(id) => {
+    try{
+        return await axios.get(`http://localhost:5000/annoucements/userAnnoucements/${id}`)
+    }catch(err){
+        return err.response;
+    }
+}
+
 
 

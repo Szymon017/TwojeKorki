@@ -7,10 +7,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import categories from '../../../assets/category/categories';
+import { addAnnouncement } from '../../../service/announcementService';
+import { getCurrentUser } from '../../../service/userDataService';
 
 export default function AddNewAnnoucement() {
   const initialState = {
-    userID: '',
+    author: '',
     title: '',
     option: '',
     category: '',
@@ -68,15 +70,9 @@ export default function AddNewAnnoucement() {
       setErrors(formErrors);
     } else {
       console.log('form submitted');
-      console.log(form);
-      
-      fetch('http://localhost:3000/annoucements/add', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(form)
-      }).then(() => {
-        console.log('new annoucement`s just added')
-      })
+      const user = getCurrentUser();
+      form.author = user._id;
+      addAnnouncement(form);
     }
   };
   

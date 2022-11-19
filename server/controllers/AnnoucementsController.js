@@ -1,5 +1,5 @@
 import Annoucement from "../models/Annoucement.js";
-
+import mongoose from "mongoose";
 const getAllAnnoucements = async (req, res) => {
     const page = req.query.p || 0; 
     const annoucementsPerPage = 15;
@@ -42,16 +42,23 @@ const getAnnoucementById = async (req, res) => {
 const addNewAnnoucement = async (req, res) => {
     const {title, description, author, price, category, option, date} = req.body;
 
+
     try {
+        if(!title || !description || !author || !price || !category || !option){
+            res.send(500).json({
+                message: "Prosze uzupełnić niezbędne pola"
+            })
+        }
+
         const newAnnoucement = await Annoucement.create({
-            title, description, author, price, category, option, date
+            title, description, author, price, category, option
         })
         res.status(200).json({
             status: 'Successfully created an annoucement',
             data: newAnnoucement
         });
     } catch (error) {
-        res.send(500).json({
+        res.status(500).json({
             status: 'Failed to create an annoucement',
             message: error
         })
@@ -92,10 +99,24 @@ const updateAnnoucement = async (req, res) => {
     }
 }
 
+const getUserAnnoucements = async (req, res) => {
+    const id = req.params.id;
+    try{
+        const result = await Annoucement.find({"author": id})
+        console.log(result)
+        res.send(result)
+    }catch(err){
+        res.status(500).json({
+            message: err.message
+        })
+    }
+}
+
 export {
     getAllAnnoucements,
     getAnnoucementById,
     addNewAnnoucement,
     updateAnnoucement,
-    deleteAnnoucement
+    deleteAnnoucement,
+    getUserAnnoucements
 }

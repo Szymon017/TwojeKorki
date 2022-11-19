@@ -83,7 +83,6 @@ const signupUser = async (req, res) => {
     const user = await User.signup(email, password, firstName, lastName, sex, rating, telephone, role)
 
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(200).json({
       message: "Account created"
     })
