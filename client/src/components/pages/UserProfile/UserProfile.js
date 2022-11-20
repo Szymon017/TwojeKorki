@@ -7,6 +7,7 @@ import img from "../../../assets/images/a1.jpg";
 import "./style.css";
 import { getCurrentUser } from "../../../service/userDataService";
 import { getUserAnnoucements } from "../../../service/userService";
+import OneAnnounce from "../Annoucements/OneAnnounce";
 
 export default function UserProfile() {
   const [user, setUser] = useState(getCurrentUser());
@@ -67,6 +68,20 @@ export default function UserProfile() {
 
             <Row></Row>
           </Col>
+        </Row>
+        <Row>
+          <h1>Moje ogłoszenia</h1>
+        {annoucements ? (
+                annoucements.map((ann) => (
+                  <Row className="g-0">
+                  <Col key={ann.title} sm={12} md={12} lg={12} className="mb-1">
+                    <OneAnnounce product={ann}></OneAnnounce>
+                  </Col>
+                </Row>
+                ))
+              ) : (
+                <h2>Brak dostepnych informacji</h2>
+              )}
         </Row>
       </Container>
     </div>
