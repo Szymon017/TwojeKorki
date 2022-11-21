@@ -5,8 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import img from './../../../assets/images/a1.jpg';
 import { Link } from 'react-router-dom';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-export default function OneAnnounce(props) {
+export default function OneAnnInProf(props) {
   const { announce } = props;
   return (
     <Card style={{ background: 'rgb(245, 225, 203)' }}>
@@ -23,7 +24,8 @@ export default function OneAnnounce(props) {
               </Link>
             </Col>
             <Col md={12} className="d-flex justify-content-center">
-              {/*Tutaj jak umiesz zrob zeby imie autora sie wyswietlalo albo nazwisko*/}{announce.author}
+              {/*Tutaj jak umiesz zrob zeby imie autora sie wyswietlalo albo nazwisko*/}
+              {announce.author}
             </Col>
           </Row>
         </Col>
@@ -43,9 +45,25 @@ export default function OneAnnounce(props) {
                 {' '}
                 <Card.Text> {announce.price} zł/godz</Card.Text>
               </Col>
-              <Col className="">
+              <Col className="text-end" >
                 <Link to={`/announcement/${announce.title}`}>
-                  <Button variant="warning">Wejdz do ogloszenia</Button>
+                  <Button variant="warning">
+                    Otwórz
+                  </Button>
+                </Link>
+              
+                {' '}
+                <Link to={'/'}>
+                  <Button variant="warning">
+                    Edytuj <i class="bi bi-pencil"></i>
+                  </Button>
+                </Link>
+              
+                {' '}
+                <Link to={`/sda`}>
+                  <Button variant="warning">
+                    Usuń <i class="bi bi-trash"></i>
+                  </Button>
                 </Link>
               </Col>
             </Row>

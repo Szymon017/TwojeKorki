@@ -1,10 +1,8 @@
-import data from "../../../assets/data/data";
-import OneAnnounce from "./OneAnnounce";
-import img from "./../../../assets/images/a1.jpg";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { useState, useEffect } from "react";
-import { getAnnoucements } from "../../../service/announcementService";
+import OneAnnounce from './OneAnnounce';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { useState, useEffect } from 'react';
+import { getAnnoucements } from '../../../service/announcementService';
 
 export default function Annoucements() {
   const [annoucements, setAnnoucements] = useState();
@@ -21,19 +19,19 @@ export default function Annoucements() {
 
   return (
     <div>
-      <h1>Ogłoszenia użytkowników</h1>
+      <h1 className="">Ogłoszenia użytkowników</h1>
 
-      <div className="products">
+      <div className="announces my-3">
         <Row>
           {annoucements
             ? annoucements.map((ann) => (
-                <Row>
-                  <Col key={ann.title} sm={12} md={12} lg={12} className="mb-1">
-                    <OneAnnounce product={ann}></OneAnnounce>
+                <Row key={ann.title}>
+                  <Col sm={12} md={12} lg={12} className="mb-1">
+                    <OneAnnounce announce={ann}></OneAnnounce>
                   </Col>
                 </Row>
               ))
-            : ""}
+            : ''}
         </Row>
       </div>
     </div>

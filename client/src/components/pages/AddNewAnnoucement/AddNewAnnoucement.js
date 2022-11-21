@@ -88,12 +88,12 @@ export default function AddNewAnnoucement() {
 
   return (
     <div className="addAnnContainer">
-      <h1 className="my-3">Dodaj Ogłoszenie</h1>
+      <h1 className="my-3 fw-bold text-center">Dodaj Ogłoszenie</h1>
       <Container>
         <Form>
           {/*Tytuł */}
           <Form.Group as={Row} className="mb-3" controlId="title">
-            <Form.Label column sm={3}>
+            <Form.Label column sm={3} className=" fw-bold">
               Tytuł:
             </Form.Label>
             <Col sm={9}>
@@ -113,7 +113,7 @@ export default function AddNewAnnoucement() {
 
           {/*Dodaje jako */}
           <Form.Group controlId="option" as={Row} className="mb-3">
-            <Form.Label as="legend" column sm={3}>
+            <Form.Label as="legend" column sm={3} className=" fw-bold">
               Dodaje jako:
             </Form.Label>
             <Col sm={9}>
@@ -136,7 +136,7 @@ export default function AddNewAnnoucement() {
           </Form.Group>
           {/*Kategorie */}
           <Form.Group as={Row} className="mb-3" controlId="category">
-            <Form.Label column sm={3}>
+            <Form.Label column sm={3} className=" fw-bold">
               Kategoria:
             </Form.Label>
             <Col sm={9}>
@@ -159,7 +159,7 @@ export default function AddNewAnnoucement() {
 
           {/*Lokalizacja */}
           <Form.Group as={Row} className="mb-3" controlId="location">
-            <Form.Label column sm={3}>
+            <Form.Label column sm={3} className=" fw-bold">
               Lokalizacja:
             </Form.Label>
             <Col sm={9}>
@@ -179,7 +179,7 @@ export default function AddNewAnnoucement() {
 
           {/*Opis */}
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Opis:</Form.Label>
+            <Form.Label className=" fw-bold">Opis:</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -197,7 +197,7 @@ export default function AddNewAnnoucement() {
 
           {/*Cena */}
           <Form.Group as={Row} className="mb-3" controlId="price">
-            <Form.Label column sm={4}>
+            <Form.Label column sm={4} className=" fw-bold">
               Cena za godzine:
             </Form.Label>
             <Col sm={8}>

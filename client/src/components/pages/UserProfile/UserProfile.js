@@ -7,8 +7,10 @@ import img from '../../../assets/images/a1.jpg';
 import './style.css';
 import { getCurrentUser } from '../../../service/userDataService';
 import { getUserAnnoucements } from '../../../service/userService';
-import OneAnnounce from '../Annoucements/OneAnnounce';
+
 import Rating from '../Rating/Rating';
+import { Link } from 'react-router-dom';
+import OneAnnInProf from './OneAnnInProf';
 
 export default function UserProfile() {
   const [user, setUser] = useState(getCurrentUser());
@@ -25,9 +27,9 @@ export default function UserProfile() {
 
   return (
     <div>
-      <h1 className="my-3">Profil użytkownika {user.firstName}</h1>
-      <Container className=" my-5 justify-content-center">
-        <Row>
+      <h1 className="my-3 ">Profil użytkownika {user.firstName}</h1>
+      <Container className=" my-3 justify-content-center">
+        <Row className="g-0">
           {/* Leftbar*/}
           <Col md={4} className="profileLeftPanel">
             <Row>
@@ -42,51 +44,24 @@ export default function UserProfile() {
                   <Rating rating={user.rating} numReviews={3} />
                 </span>
               </h5>
+              <Link to={`/userProfile/edit`}>
               <button className="btn btn-dark">Edytuj dane</button>
+              </Link>
             </Row>
           </Col>
           {/* middle + rightbar*/}
           <Col md={7} className="profileMiddlePanel">
-            <Row>
-              <Col>
-                <button onClick={getAnn} className="btn btn-dark">
-                  Zobacz ogłoszenia użytkownika
-                </button>
-              </Col>
-              <Col>
-                <button onClick={getAnn} className="btn btn-dark">
-                  Zobacz opinie o użytkowniku
-                </button>
-              </Col>
-            </Row>
-            {annoucements ? (
-              annoucements.map((ann) => (
-                <Row>
-                  <Col>
-                    <p className="annoucementTile">{ann.title}</p>
-                  </Col>
-                  <Col>
-                    <p className="annoucementTile">{ann.category}</p>
-                  </Col>
-                  <Col>
-                    <p className="annoucementTile">{ann.option}</p>
-                  </Col>
-                </Row>
-              ))
-            ) : (
-              <h2>Brak dostepnych informacji</h2>
-            )}
-
-            <Row></Row>
+            <h1>Opis użytkownika</h1>
+            <h6>{user.description}</h6>
           </Col>
         </Row>
         <Row>
           <h1>Moje ogłoszenia</h1>
           {annoucements ? (
             annoucements.map((ann) => (
-              <Row className="g-0">
-                <Col key={ann.title} sm={12} md={12} lg={12} className="mb-1">
-                  <OneAnnounce product={ann}></OneAnnounce>
+              <Row key={ann.title} className="g-0">
+                <Col  sm={12} md={12} lg={12} className="mb-1">
+                  <OneAnnInProf announce={ann}></OneAnnInProf>
                 </Col>
               </Row>
             ))
