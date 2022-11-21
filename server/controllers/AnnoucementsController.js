@@ -7,7 +7,8 @@ const getAllAnnoucements = async (req, res) => {
   try {
     const annoucements = await Annoucement.find({})
       .skip(page * annoucementsPerPage)
-      .limit(annoucementsPerPage);
+      .limit(annoucementsPerPage)
+      .populate('author');
     res.status(200).json({
       status: 'Successfully got an annoucement',
       results: annoucements.length,

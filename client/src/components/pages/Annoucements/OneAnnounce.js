@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 
 export default function OneAnnounce(props) {
   const { announce } = props;
+
+ 
   return (
     <Card style={{ background: 'rgb(245, 225, 203)' }}>
       <Row className="g-0">
         <Col md={2}>
           <Row className="g-0">
-            <Col md={12} className="d-flex justify-content-center">
+            <Col md={12} className="d-flex justify-content-center ">
               <Link to={`/announcement/${announce.title}`}>
                 <img
                   className="img-fluid rounded-start"
@@ -23,7 +25,7 @@ export default function OneAnnounce(props) {
               </Link>
             </Col>
             <Col md={12} className="d-flex justify-content-center">
-              {/*Tutaj jak umiesz zrob zeby imie autora sie wyswietlalo albo nazwisko*/}{announce.author}
+              {announce.author ? (<b> {announce.author.firstName + " " + announce.author.lastName }</b>): ""}
             </Col>
           </Row>
         </Col>
