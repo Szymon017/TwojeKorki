@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -9,11 +9,15 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function OneAnnInProf(props) {
   const { announce } = props;
+
+  useEffect(()=>{
+    console.log(announce);
+  })
   return (
-    <Card style={{ background: 'rgb(245, 225, 203)' }}>
-      <Row className="g-0">
+ 
+      <Row className="g-0 singleAnnouce">
         <Col md={2}>
-          <Row className="g-0">
+          <Row className="g-0 ">
             <Col md={12} className="d-flex justify-content-center">
               <Link to={`/announcement/${announce.title}`}>
                 <img
@@ -22,10 +26,6 @@ export default function OneAnnInProf(props) {
                   alt={announce.option}
                 ></img>
               </Link>
-            </Col>
-            <Col md={12} className="d-flex justify-content-center">
-              {/*Tutaj jak umiesz zrob zeby imie autora sie wyswietlalo albo nazwisko*/}
-              {announce.author}
             </Col>
           </Row>
         </Col>
@@ -70,6 +70,6 @@ export default function OneAnnInProf(props) {
           </Card.Body>
         </Col>
       </Row>
-    </Card>
+   
   );
 }

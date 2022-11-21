@@ -54,8 +54,8 @@ export default function UserProfile() {
             <h1>Opis użytkownika</h1>
             <h6>{user.description}</h6>
           </Col>
-        </Row>
-        <Row>
+          <Row>
+            <Col>
           <h1>Moje ogłoszenia</h1>
           {annoucements ? (
             annoucements.map((ann) => (
@@ -65,9 +65,11 @@ export default function UserProfile() {
                 </Col>
               </Row>
             ))
-          ) : (
-            <h2>Brak dostepnych informacji</h2>
-          )}
+            ) : (
+              <h2>Brak dostepnych informacji</h2>
+              )}
+              </Col>
+        </Row>
         </Row>
       </Container>
     </div>
