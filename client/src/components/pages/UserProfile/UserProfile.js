@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import img from "../../../assets/images/a1.jpg";
-import "./style.css";
-import { getCurrentUser } from "../../../service/userDataService";
-import { getUserAnnoucements } from "../../../service/userService";
-import OneAnnounce from "../Annoucements/OneAnnounce";
+import React, { useEffect, useState } from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import img from '../../../assets/images/a1.jpg';
+import './style.css';
+import { getCurrentUser } from '../../../service/userDataService';
+import { getUserAnnoucements } from '../../../service/userService';
+import OneAnnounce from '../Annoucements/OneAnnounce';
+import Rating from '../Rating/Rating';
 
 export default function UserProfile() {
   const [user, setUser] = useState(getCurrentUser());
@@ -33,9 +34,14 @@ export default function UserProfile() {
               <img src={img} className="profilePhoto"></img>
             </Row>
             <Row className="my-3">
-              <h2>{user.firstName + " " + user.lastName}</h2>
+              <h2>{user.firstName + ' ' + user.lastName}</h2>
               <h5>{user.email}</h5>
               <h5>{user.telephone}</h5>
+              <h5>
+                <span>
+                  <Rating rating={user.rating} numReviews={3} />
+                </span>
+              </h5>
               <button className="btn btn-dark">Edytuj dane</button>
             </Row>
           </Col>
@@ -53,35 +59,40 @@ export default function UserProfile() {
                 </button>
               </Col>
             </Row>
-              {annoucements ? (
-                annoucements.map((ann) => (
-                  <Row>
-                    <Col><p className='annoucementTile'>{ann.title}</p></Col>
-                    <Col><p className='annoucementTile'>{ann.category}</p></Col>
-                    <Col><p className='annoucementTile'>{ann.option}</p></Col>
-                  </Row>
-                ))
-              ) : (
-                <h2>Brak dostepnych informacji</h2>
-              )}
-            
+            {annoucements ? (
+              annoucements.map((ann) => (
+                <Row>
+                  <Col>
+                    <p className="annoucementTile">{ann.title}</p>
+                  </Col>
+                  <Col>
+                    <p className="annoucementTile">{ann.category}</p>
+                  </Col>
+                  <Col>
+                    <p className="annoucementTile">{ann.option}</p>
+                  </Col>
+                </Row>
+              ))
+            ) : (
+              <h2>Brak dostepnych informacji</h2>
+            )}
 
             <Row></Row>
           </Col>
         </Row>
         <Row>
           <h1>Moje ogłoszenia</h1>
-        {annoucements ? (
-                annoucements.map((ann) => (
-                  <Row className="g-0">
-                  <Col key={ann.title} sm={12} md={12} lg={12} className="mb-1">
-                    <OneAnnounce product={ann}></OneAnnounce>
-                  </Col>
-                </Row>
-                ))
-              ) : (
-                <h2>Brak dostepnych informacji</h2>
-              )}
+          {annoucements ? (
+            annoucements.map((ann) => (
+              <Row className="g-0">
+                <Col key={ann.title} sm={12} md={12} lg={12} className="mb-1">
+                  <OneAnnounce product={ann}></OneAnnounce>
+                </Col>
+              </Row>
+            ))
+          ) : (
+            <h2>Brak dostepnych informacji</h2>
+          )}
         </Row>
       </Container>
     </div>

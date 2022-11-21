@@ -96,3 +96,8 @@ main {
 .product-info {
   padding: 1rem;
 }
+
+
+.rating span {
+  color: #ffc000;
+}
