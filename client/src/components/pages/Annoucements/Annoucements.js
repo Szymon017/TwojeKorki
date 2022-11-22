@@ -38,22 +38,8 @@ export default function Annoucements() {
             <option value="3">Matematyka</option>
           </Form.Select>
         </Col>
-        <Col md={4}>
-          <Form.Control
-            type="text"
-            id="annoucementCategory"
-            placeholder='Miasto'
-          />
-        </Col>
-        <Col md={4}>
-          <Form.Select aria-label="Default select example">
-            <option>Rodzaj ogłoszenia</option>
-            <option value="student">Uczeń</option>
-            <option value="teacher">Nauczyciel</option>
-          </Form.Select>
-        </Col>
         <Row>
-          <Col md="12"><Button variant="warning" onClick={moreFilters}>Więcej filtrów</Button></Col>
+          <Col md="12"><Button variant="warning"  className='mt-3'onClick={moreFilters}>Więcej filtrów</Button></Col>
         </Row>
         {showFilters ? (<MoreFilters/>):""}
       </Row>

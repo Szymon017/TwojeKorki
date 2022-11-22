@@ -1,11 +1,21 @@
 import Annoucement from '../models/Annoucement.js';
-import mongoose from 'mongoose';
+
+
 const getAllAnnoucements = async (req, res) => {
   const page = req.query.p || 0;
   const annoucementsPerPage = 15;
+  const query = {} // <----- tutaj przechowuje filtry, które przyjdą w żądaniu
+
+  if(req.query.category) {
+    query.category = req.query.category;
+  }
+
+
+
+  console.log(query);
 
   try {
-    const annoucements = await Annoucement.find({})
+    const annoucements = await Annoucement.find(query)
       .skip(page * annoucementsPerPage)
       .limit(annoucementsPerPage)
       .populate('author');
