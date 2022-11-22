@@ -9,7 +9,14 @@ const getAllAnnoucements = async (req, res) => {
   if(req.query.category) {
     query.category = req.query.category;
   }
+  
+  if(req.query.location) {
+    query.location = req.query.location;
+  }
 
+  if(req.query.option) {
+    query.option = req.query.option;
+  }
 
 
   console.log(query);

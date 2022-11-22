@@ -33,17 +33,18 @@ export default function MoreFilters() {
                 <Col md={3}>
                     <Form.Select aria-label="Default select example">
                         <option>Kategoria</option>
-                        <option value="1">Korepetytor</option>
-                        <option value="2">Uczeń</option>
+                        <option value="Teacher">Korepetytor</option>
+                        <option value="Student">Uczeń</option>
                     </Form.Select>
                 </Col>
                 <Col md={2}>
+                    {/*Tutaj jeszcze nie wiem jakie wartości value dać, bo asc i desc bedzie dla ceny i daty wiec chwila z tym */}
                     <Form.Select aria-label="Default select example">
                         <option>Kategoria</option>
-                        <option value="1">Cena rosnąco</option>
-                        <option value="2">Cena malejąco</option>
-                        <option value="3">Najdroższe</option>
-                        <option value="3">Najtańsze</option>
+                        <option value="asc">Cena rosnąco</option>
+                        <option value="desc">Cena malejąco</option>
+                        <option value="3">Najnowsze</option>
+                        <option value="3">Najstarsze</option>
                     </Form.Select>
                 </Col>
             </Row>
