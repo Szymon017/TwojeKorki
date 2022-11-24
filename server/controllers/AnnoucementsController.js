@@ -5,27 +5,42 @@ const getAllAnnoucements = async (req, res) => {
   const page = req.query.p || 0;
   const annoucementsPerPage = 15;
   const query = {} // <----- tutaj przechowuje filtry, które przyjdą w żądaniu
+  const sort = {};
 
-  if(req.query.category) {
+  if (req.query.category) {
     query.category = req.query.category;
   }
-  
-  if(req.query.location) {
+
+  if (req.query.location) {
     query.location = req.query.location;
   }
 
-  if(req.query.option) {
+  if (req.query.option) {
     query.option = req.query.option;
+  }
+  if (req.query.minPrice && req.query.maxPrice) {
+    query.price = { $gt: req.query.minPrice, $lt: req.query.maxPrice }
+  }
+  if (req.query.maxPrice && !req.query.minPrice) {
+    query.price = { $lt: req.query.maxPrice }
+  }
+  if (!req.query.maxPrice && req.query.minPrice) {
+    query.price = { $gt: req.query.minPrice }
+  }
+  if(req.query.sortOption){
+    const str = req.query.sortOption.split(':');
+    sort[str[0]] = str[1] === 'desc' ? -1:1;
   }
 
 
-  console.log(query);
+  console.log(JSON.stringify(sort));
 
   try {
     const annoucements = await Annoucement.find(query)
       .skip(page * annoucementsPerPage)
       .limit(annoucementsPerPage)
-      .populate('author');
+      .populate('author')
+      .sort(sort)
     res.status(200).json({
       status: 'Successfully got an annoucement',
       results: annoucements.length,

@@ -31,11 +31,13 @@ export default function Annoucements() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault(); //prevent post data
     console.log('form filtr submitted');
-    console.log(form);
-    //tu se wyślij na backend 
+    setAnnoucements(null);
+    const result = await getAnnoucements(form);
+    setAnnoucements(result.data.data.annoucements)
+
   };
 
   const [annoucements, setAnnoucements] = useState();
@@ -160,7 +162,7 @@ export default function Annoucements() {
                               setField('option', e.target.value);
                             }}
                           >
-                            <option>Wybierz opcje...</option>
+                            <option></option>
                             <option value="Teacher">Korepetytora</option>
                             <option value="Student">Uczenia</option>
                           </Form.Select>
@@ -249,10 +251,10 @@ export default function Annoucements() {
                         setField('sortOption', e.target.value);
                       }}
                     >
-                      <option value="old">Najnowsze</option>
-                      <option value="new">Najstarsze</option>
-                      <option value="maxPrice">Najdroższe</option>
-                      <option value="minPrice">Najtańsze</option>
+                      <option value="date:desc">Najnowsze</option>
+                      <option value="date:asc">Najstarsze</option>
+                      <option value="price:desc">Najdroższe</option>
+                      <option value="price:asc">Najtańsze</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>

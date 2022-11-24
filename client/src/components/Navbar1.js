@@ -37,9 +37,10 @@ export default function Navbar1() {
               {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
               </Nav>
             <Nav>
-              
+              {user ? <CustomLink to="/favourites">Ulubione</CustomLink> : ""}
               {user ? <CustomLink to="/userProfile">Mój profil</CustomLink>:''}
-              {user ? <CustomLink to="logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
+              {user ? <CustomLink to="/logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
+              
             </Nav>
           
         </Navbar.Collapse>
