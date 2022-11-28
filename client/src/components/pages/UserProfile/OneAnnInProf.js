@@ -6,13 +6,17 @@ import Col from 'react-bootstrap/Col';
 import img from './../../../assets/images/a1.jpg';
 import { Link } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { deleteAnnoucement } from '../../../service/announcementService';
 
 export default function OneAnnInProf(props) {
   const { announce } = props;
-
   useEffect(()=>{
-    console.log(announce);
   })
+
+  const deleteAnnounce = (id) => {
+    deleteAnnoucement(id);
+    window.location.assign("/userProfile");
+  }
   return (
  
       <Row className="g-0 singleAnnouce">
@@ -60,8 +64,8 @@ export default function OneAnnInProf(props) {
                 </Link>
               
                 {' '}
-                <Link to={`/sda`}>
-                  <Button variant="warning">
+                <Link to={`/userProfile`}>
+                  <Button variant="warning" onClick={() => {deleteAnnounce(announce._id)}}>
                     Usuń <i class="bi bi-trash"></i>
                   </Button>
                 </Link>

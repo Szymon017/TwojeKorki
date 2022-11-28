@@ -8,6 +8,7 @@ import Login from './components/pages/Login/Login';
 import UserProfile from './components/pages/UserProfile/UserProfile';
 import EditUserProfile from './components/pages/UserProfile/EditUserProfile';
 import Annouce from './components/pages/Announce-info/Announce.js';
+import Favourites from './components/pages/Favourites/Favourites.js'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/userProfile/edit" element={<EditUserProfile />} />
             <Route path="/announcement/:title" element={<Annouce />} />
+            <Route path="/favourites" element={<Favourites />} />
           </Routes>
         </div>
       </main>

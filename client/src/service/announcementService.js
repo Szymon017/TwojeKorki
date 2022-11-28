@@ -15,3 +15,11 @@ export const getAnnoucements = async() => {
     return err.response.data;
   }
 }
+
+export const deleteAnnoucement = async(id) => {
+  try{
+    return await axios.delete(`http://localhost:5000/annoucements/${id}`)
+  }catch(err) {
+    return err.response.data;
+  }
+}

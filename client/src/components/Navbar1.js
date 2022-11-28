@@ -33,15 +33,16 @@ export default function Navbar1() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-             {user ? <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
-              {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
-              </Nav>
-            <Nav>
-              
-              {user ? <CustomLink to="/userProfile">Mój profil</CustomLink>:''}
-              {user ? <CustomLink to="logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
-            </Nav>
-          
+            {user ? <CustomLink to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
+            {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
+          </Nav>
+          <Nav>
+            {user ? <CustomLink to="favourites">Ulubione</CustomLink> : ''}
+            {user ? <CustomLink to="/userProfile">Mój profil</CustomLink> : ''}
+            {user ? <CustomLink to="logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink>}
+
+          </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

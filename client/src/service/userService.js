@@ -24,5 +24,21 @@ export const getUserAnnoucements = async(id) => {
     }
 }
 
+export const updateUser = async(id, data) => {
+    try{
+        return await axios.patch(`http://localhost:5000/users/${id}`, data)
+    }catch(err){
+        return err.response;
+    }
+}
+
+export const getUserData = async(id) => {
+    try{
+
+    }catch(err){
+        return err.response;
+    }
+}
+
 
 

@@ -43,6 +43,12 @@ const UserSchema = mongoose.Schema({
     default: 0,
   },
   announcements: [],
+  favourites: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Annoucement'
+  }
+  ],
   friends: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -132,7 +138,7 @@ UserSchema.statics.signup = async (
 };
 
 UserSchema.statics.login = async function (email, password) {
-  const user = await this.findOne({ email });
+  const user = await this.findOne({ email }).populate("favourites");
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {

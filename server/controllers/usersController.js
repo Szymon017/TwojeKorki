@@ -12,13 +12,13 @@ const createToken = (id) => {
 
 const getAllUsers = async (req, res) => {
   const match = {};
-  if(req.query.firstName){
+  if (req.query.firstName) {
     match.firstName = req.query.firstName;
   }
-  if(req.query.lastName){
+  if (req.query.lastName) {
     match.lastName = req.query.lastName;
   }
-  if(req.query.email){
+  if (req.query.email) {
     match.email = req.query.email;
   }
   console.log(match);
@@ -62,12 +62,25 @@ const login = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
-    const token = createToken(user);
-    res.status(200).json({ 
+    const userToken = {
+      _id: user._id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      rating: user.rating,
+      numReviews: user.numReviews,
+      description: user.description,
+      telephone: user.telephone,
+      lastSeen: user.lastSeen,
+      favourites: user.favourites,
+      friends: user.friends
+    }
+    const token = createToken(userToken);
+    res.status(200).json({
       status: "Logged in",
       token: token,
       message: user
-     });
+    });
   } catch (err) {
     res.status(400).json({
       status: "Błąd poczas logowania",
@@ -86,7 +99,7 @@ const signupUser = async (req, res) => {
     res.status(200).json({
       message: "Account created"
     })
-    
+
   } catch (error) {
     res.status(500).json({
       error: error.message,
@@ -98,7 +111,7 @@ const signupUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const result = await User.findOneAndDelete({ _id: req.params.id });
-    if(!result) throw Error("No user found!");
+    if (!result) throw Error("No user found!");
 
     res.status(201).json({
       status: 'Successfully deleted user',
@@ -114,23 +127,44 @@ const deleteUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+
+    console.log(req.body);
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
-    if(!newUser) throw Error("No user found!");
-    res.status(200).json({
-      status: 'Succesfully updated an user',
-      data: newUser
-    })
+    console.log(newUser);
+    if (!newUser) {
+      throw Error("No user found!")
+    } else {
+      //token update
+      const userToken = {
+        _id: newUser._id,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        rating: newUser.rating,
+        numReviews: newUser.numReviews,
+        description: newUser.description,
+        telephone: newUser.telephone,
+        lastSeen: newUser.lastSeen,
+        favourites: newUser.favourites,
+        friends: newUser.friends
+      }
+      const token = createToken(userToken);
+      //
+      res.status(200).json({
+        status: 'Succesfully updated an user',
+        data: newUser,
+        token: token
+      })
+    }
   } catch (error) {
     res.status(500).json({
       status: 'Failed to update an user',
-      message: error
+      message: error.message
     });
   }
 }
-
-
 
 export {
   getAllUsers,
