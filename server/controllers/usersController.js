@@ -21,7 +21,6 @@ const getAllUsers = async (req, res) => {
   if (req.query.email) {
     match.email = req.query.email;
   }
-  console.log(match);
   try {
     const users = await User.find(match).populate("friends");
     res.status(200).json({
