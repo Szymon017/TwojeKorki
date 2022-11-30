@@ -11,20 +11,20 @@ import { updateUser } from '../../../service/userService';
 
 export default function OneAnnounce(props) {
   const { announce } = props;
-  const [user, setUser] = useState(getCurrentUser())
 
   const addToFavourite = async(id) => {
+    const user = getCurrentUser();
     let fav = {favourites: user.favourites};
+    console.log(fav);
     let good = true;
-    fav.favourites.map((fav) => (
-      fav == id ? good=false : good=true
+    fav.favourites.map((obj) => (
+      obj === id ? good = false : ''
     ))
     
     if(user && good){
       fav.favourites.push(id)
       const result = await updateUser(user._id, fav)
       if(result.data) {
-        
         localStorage.setItem("token", result.data.token)
       }else{
         console.log("Nie dzioło");

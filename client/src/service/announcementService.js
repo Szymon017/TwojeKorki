@@ -46,3 +46,11 @@ export const deleteAnnoucement = async(id) => {
     return err.response.data;
   }
 }
+
+export const getAnnoucementById = async(id) => {
+  try{
+    return await axios.get(`http://localhost:5000/annoucements/${id}`)
+  }catch(err){
+    return err.message;
+  }
+}

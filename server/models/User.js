@@ -138,7 +138,7 @@ UserSchema.statics.signup = async (
 };
 
 UserSchema.statics.login = async function (email, password) {
-  const user = await this.findOne({ email }).populate("favourites");
+  const user = await this.findOne({ email });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
