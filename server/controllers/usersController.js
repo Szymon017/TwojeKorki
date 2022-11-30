@@ -131,7 +131,7 @@ const updateUser = async (req, res) => {
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
-    console.log(newUser);
+    console.log(req.body);
     if (!newUser) {
       throw Error("No user found!")
     } else {
