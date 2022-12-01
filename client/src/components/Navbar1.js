@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 export default function Navbar1() {
@@ -37,9 +38,11 @@ export default function Navbar1() {
               {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
               </Nav>
             <Nav>
-              {user ? <CustomLink to="/favourites">Ulubione</CustomLink> : ""}
-              {user ? <CustomLink to="/userProfile">Mój profil</CustomLink>:''}
-              {user ? <CustomLink to="/logout" onClick={logout}>Wyloguj się</CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
+              {user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""}
+              {user ? <CustomLink to="/messages"> Wiadomości <i class="bi bi-chat-dots-fill"/></CustomLink> : ""}
+              {user ? <CustomLink to="/favourites">Ulubione <i class="bi bi-heart-fill"/> </CustomLink> : ""}
+              {user ? <CustomLink to="/userProfile">Mój profil <i class="bi bi-person-circle"/> </CustomLink>:''}
+              {user ? <CustomLink to="/logout" onClick={logout}>Wyloguj się <i class="bi bi-power"/> </CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
               
             </Nav>
           

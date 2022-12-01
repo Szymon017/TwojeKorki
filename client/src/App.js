@@ -9,6 +9,7 @@ import UserProfile from './components/pages/UserProfile/UserProfile';
 import EditUserProfile from './components/pages/UserProfile/EditUserProfile';
 import Annouce from './components/pages/Announce-info/Announce.js';
 import Favourites from './components/pages/Favourites/Favourites.js'
+import Friends from './components/pages/Friends/Friends';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/userProfile/edit" element={<EditUserProfile />} />
             <Route path="/announcement/:title" element={<Annouce />} />
             <Route path="/favourites" element={<Favourites />} />
+            <Route path="/friends" element={<Friends />} />
           </Routes>
         </div>
       </main>

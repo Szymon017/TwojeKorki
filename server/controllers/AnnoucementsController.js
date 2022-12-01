@@ -58,7 +58,7 @@ const getAllAnnoucements = async (req, res) => {
 
 const getAnnoucementById = async (req, res) => {
   try {
-    const annoucement = await Annoucement.findOne({ _id: req.params.id });
+    const annoucement = await Annoucement.findOne({ _id: req.params.id }).populate('author');
     res.status(200).json({
       status: 'Successfully got all annoucements',
       results: annoucement.length,
