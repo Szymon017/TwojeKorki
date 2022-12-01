@@ -7,10 +7,24 @@ import img from './../../../assets/images/a1.jpg';
 import { Link } from 'react-router-dom';
 import { getCurrentUser } from '../../../service/userDataService';
 import { updateUser } from '../../../service/userService';
+import Annouce from '../Announce-info/Announce';
 
 
 export default function OneAnnounce(props) {
   const { announce } = props;
+  const [ currentUser, setCurrentUser ] = useState(getCurrentUser());
+  const [ favourites, setFavourites ] = useState(currentUser.favourites);
+  const [ option, setOption ] = useState(false);
+  
+  useEffect(()=>{
+    checkForFavourite();
+  }, [])
+
+  const checkForFavourite = () => {
+    favourites.map((item)=>{
+      if(announce._id === item) setOption(true);
+    })
+  }
 
   const addToFavourite = async(id) => {
     const user = getCurrentUser();
@@ -24,6 +38,7 @@ export default function OneAnnounce(props) {
     if(user && good){
       fav.favourites.push(id)
       const result = await updateUser(user._id, fav)
+      setOption(true);
       if(result.data) {
         localStorage.setItem("token", result.data.token)
       }else{
@@ -32,6 +47,9 @@ export default function OneAnnounce(props) {
     } 
   }
 
+  const deleteFromFavourite = async(id) => {
+    setOption(false);
+  }
 
   return (
     <Card style={{ background: 'rgb(245, 225, 203)' }}>
@@ -73,9 +91,14 @@ export default function OneAnnounce(props) {
                 <Link to={`/announcement/${announce.title}`}>
                   <Button variant="warning">Wejdz do ogloszenia</Button>
                 </Link>
-                <Button variant="danger" onClick={() => {addToFavourite(announce._id)}}>
+                {option? (
+                  <Button variant="success" onClick={() => {deleteFromFavourite(announce._id)}}>
                   <i class="bi bi-heart-fill"></i>
                 </Button>
+                ):(<Button variant="danger" onClick={() => {addToFavourite(announce._id)}}>
+                <i class="bi bi-heart-fill"></i>
+              </Button>)}
+                
               </Col>
             </Row>
           </Card.Body>
