@@ -36,9 +36,10 @@ export default function OneAnnounce(props) {
     ))
     
     if(user && good){
+      setOption(true);
+
       fav.favourites.push(id)
       const result = await updateUser(user._id, fav)
-      setOption(true);
       if(result.data) {
         localStorage.setItem("token", result.data.token)
       }else{
@@ -48,7 +49,29 @@ export default function OneAnnounce(props) {
   }
 
   const deleteFromFavourite = async(id) => {
-    setOption(false);
+    
+    const user = getCurrentUser();
+    let fav = {favourites: user.favourites};
+    console.log(fav);
+    let good = false;
+    //sprawdzenie czy w array istnieje takie ogłoszenie
+    fav.favourites.map((obj) => (
+      obj === id ? good = true : ''
+    ))
+    
+    if(user && good){
+      const index = fav.favourites.indexOf(id)
+      console.log(index);
+      fav.favourites.splice(index, 1);
+      const result = await updateUser(user._id, fav)
+      setOption(true);
+      if(result.data) {
+        setOption(false);
+        localStorage.setItem("token", result.data.token)
+      }else{
+        console.log("Nie dzioło");
+      }
+    } 
   }
 
   return (

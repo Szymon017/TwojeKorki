@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import usersRoutes from './routes/Users.js';
+import UsersRoutes from './routes/Users.js';
 import AnnoucementsRoutes from './routes/Annoucements.js';
+import MessageRoutes from './routes/Messages.js';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import { userAuth } from './middleware/userAuth.js';
@@ -24,8 +25,9 @@ app.use(express.urlencoded({extended: false}));
 mongoose.connect(`mongodb+srv://root1:${process.env.DATABASE_PASSWORD}@twojekorki.v642pqe.mongodb.net/?retryWrites=true&w=majority`);
 
 
-app.use('/users', usersRoutes);
+app.use('/users', UsersRoutes);
 app.use('/annoucements', AnnoucementsRoutes)
+app.use('/messages', MessageRoutes)
 
 
 app.listen(PORT, () => {
