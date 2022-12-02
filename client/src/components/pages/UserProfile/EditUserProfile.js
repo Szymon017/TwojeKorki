@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import './style.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -91,7 +90,7 @@ export default function EditUserProfile() {
         <Form>
           {/*Email */}
           <Form.Group as={Row} className="mb-3" controlId="email">
-            <Form.Label column sm={3} className=" fw-bold">
+            <Form.Label data-testid="FormLabelEmail" column sm={3} className=" fw-bold">
               Email:
             </Form.Label>
             <Col sm={9}>
@@ -111,7 +110,7 @@ export default function EditUserProfile() {
 
           {/*firstName */}
           <Form.Group controlId="firstName" as={Row} className="mb-3">
-            <Form.Label column sm={3} className=" fw-bold">
+            <Form.Label data-testid="FormLabelName" column sm={3} className=" fw-bold">
               Imie:
             </Form.Label>
             <Col sm={9}>
