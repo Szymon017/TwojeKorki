@@ -2,24 +2,32 @@ import mongoose from 'mongoose';
 import User from './User.js';
 
 const MessageSchema = mongoose.Schema({
-  sender: {
+  userA: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User,
     required: true,
   },
-  receiver: {
+  userB: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User,
     required: true,
   },
-  message: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
+  messages: [{
+    sender: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: User,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
+  }],
+  
 });
 
 const Message = mongoose.model('Message', MessageSchema);
