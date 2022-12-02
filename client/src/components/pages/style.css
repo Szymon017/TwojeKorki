@@ -1,15 +1,21 @@
 .homeLogo {
-    padding: 2rem;
-    color: black;
-    text-align: center;
-    background-color: #ddab3e;
-    color: #ff3300;
-    border-radius: 5%;
+  padding: 2rem;
+  color: black;
+  text-align: center;
+  background-color: #ddab3e;
+  color: #ff3300;
+  border-radius: 5%;
 }
 
 .homeLogo2 {
-    color: black;
-    text-align: center;
-    padding: 1rem;
+  color: black;
+  text-align: center;
+  padding: 1rem;
 }
 
+.addRating {
+  margin: auto;
+  background-color: rgb(245, 225, 203);
+  border-radius: 5%;
+  
+}

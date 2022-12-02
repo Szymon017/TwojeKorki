@@ -7,7 +7,7 @@ import img from './../../../assets/images/a1.jpg';
 import { Link } from 'react-router-dom';
 import { getCurrentUser } from '../../../service/userDataService';
 import { updateUser } from '../../../service/userService';
-import Annouce from '../Announce-info/Announce';
+
 
 
 export default function OneAnnounce(props) {
@@ -57,7 +57,7 @@ export default function OneAnnounce(props) {
         <Col md={2}>
           <Row className="g-0">
             <Col md={12} className="d-flex justify-content-center ">
-              <Link to={`/announcement/${announce.title}`}>
+              <Link to={`/announcement/${announce._id}`}>
                 <img
                   className="img-fluid rounded-start"
                   src={img}
@@ -88,7 +88,7 @@ export default function OneAnnounce(props) {
               </Col>
 
               <Col className="">
-                <Link to={`/announcement/${announce.title}`}>
+                <Link to={`/announcement/${announce._id}`}>
                   <Button variant="warning">Wejdz do ogloszenia</Button>
                 </Link>
                 {option? (
