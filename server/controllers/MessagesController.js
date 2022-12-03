@@ -41,6 +41,7 @@ const createMessage = async (req, res) => {
     try {
         if (!userA || !userB || !messages) {
             res.status(500).json({
+                status: "Nie udało się wysłać wiadomości",
                 message: "Wymagane są wszystkie dane!"
             })
         }

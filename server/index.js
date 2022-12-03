@@ -4,6 +4,7 @@ import cors from 'cors';
 import UsersRoutes from './routes/Users.js';
 import AnnoucementsRoutes from './routes/Annoucements.js';
 import MessageRoutes from './routes/Messages.js';
+import Reviews from './routes/Reviews.js'
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import { userAuth } from './middleware/userAuth.js';
@@ -28,6 +29,7 @@ mongoose.connect(`mongodb+srv://root1:${process.env.DATABASE_PASSWORD}@twojekork
 app.use('/users', UsersRoutes);
 app.use('/annoucements', AnnoucementsRoutes)
 app.use('/messages', MessageRoutes)
+app.use('/reviews', Reviews)
 
 
 app.listen(PORT, () => {
