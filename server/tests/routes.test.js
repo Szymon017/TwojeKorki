@@ -21,8 +21,8 @@ describe("GET /users", () => {
 
   describe("When getting user by id", () => {
     test("should respond user with id of ", async () => {
-      const response = await request(app).get("/users/6384e11aca2486b66f7549dd")
-      expect(response.body.data.user._id).toEqual("6384e11aca2486b66f7549dd")
+      const response = await request(app).get("/users/638bde2d2606e48ae43056a4")
+      expect(response.body.data.user._id).toEqual("638bde2d2606e48ae43056a4")
     })
   })
 
@@ -32,7 +32,7 @@ describe("UPDATE /users", () => {
   describe("When updating name of user to Antoni", () => {
     test("should respond user with name of Antoni ", async () => {
       const response = await request(app)
-      .patch("/users/6384e11aca2486b66f7549dd")
+      .patch("/users/638bde2d2606e48ae43056a4")
       .send({firstName: "Antoni"})
       expect(response.body.data.firstName).toEqual("Antoni")
     })
@@ -51,8 +51,8 @@ describe("GET /annoucements", ()=>{
   describe("When getting annoucement from the given id", () => {
     test("Should return annoucement of the same id as given", async () => {
       const response = await request(app)
-      .get("/annoucements/637dcfcd661089921940aa9c")
-      expect(response.body.data.annoucement._id).toEqual("637dcfcd661089921940aa9c")
+      .get("/annoucements/6387f09f3f5dbc957573c5ac")
+      expect(response.body.data.annoucement._id).toEqual("6387f09f3f5dbc957573c5ac")
     })
   })
 
@@ -60,7 +60,7 @@ describe("GET /annoucements", ()=>{
     describe("When updating annoucement of given id title to 'updatedTitle'", () => {
       test("Should return annoucement with updated title", async () => {
         const response = await request(app)
-        .patch("/annoucements/637dcfcd661089921940aa9c")
+        .patch("/annoucements/6387f09f3f5dbc957573c5ac")
         .send({"title": "updatedTitle"})
         expect(response.body.data.title).toEqual("updatedTitle")
       })
