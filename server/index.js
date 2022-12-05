@@ -32,3 +32,4 @@ app.listen(PORT, () => {
     console.log(`Server runnin' on port ${PORT}`);
 })
 
+export default app;

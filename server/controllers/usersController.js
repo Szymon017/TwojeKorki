@@ -21,7 +21,6 @@ const getAllUsers = async (req, res) => {
   if (req.query.email) {
     match.email = req.query.email;
   }
-  console.log(match);
   try {
     const users = await User.find(match).populate("friends");
     res.status(200).json({
@@ -132,7 +131,7 @@ const updateUser = async (req, res) => {
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
-    console.log(newUser);
+    console.log(req.body);
     if (!newUser) {
       throw Error("No user found!")
     } else {
