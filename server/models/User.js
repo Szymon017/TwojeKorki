@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
 
+
 const UserSchema = mongoose.Schema({
   email: {
     type: String,
@@ -42,6 +43,15 @@ const UserSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  status: {
+    isBanned: {
+      type: Boolean,
+      default: false
+    }, 
+    cause: {
+      type: String
+    }
+  },
   announcements: [],
   favourites: [
   {
@@ -74,7 +84,7 @@ UserSchema.statics.signup = async (
   role
 ) => {
   //walidacja
-
+ 
   if (
     !email ||
     !password ||
@@ -132,6 +142,7 @@ UserSchema.statics.signup = async (
     description,
     telephone,
     role,
+    status: {isBanned: 0, cause: ''}
   });
 
   return newUser;
