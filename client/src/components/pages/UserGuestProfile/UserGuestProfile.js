@@ -19,9 +19,8 @@ export default function UserGuestProfile() {
   const [user, setUser] = useState(getCurrentUser());
   const [annoucements, setAnnoucements] = useState();
   const [author1, setAuthor] = useState(getUserData(_id));
-
   const getAnn = async () => {
-
+    
     const result = await getUserAnnoucements(_id);
     setAnnoucements(result.data);
   };
@@ -50,7 +49,7 @@ export default function UserGuestProfile() {
                   <Rating rating={author1.rating} numReviews={author1.numReviews} />
                 </span>
               </h5>
-
+              
             </Row>
           </Col>
 
