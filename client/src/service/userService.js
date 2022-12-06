@@ -41,3 +41,11 @@ export const getUserData = async (id) => {
     return err.response;
   }
 };
+
+export const getAllUsers = async() => {
+    try{
+        return await axios.get(`http://localhost:5000/users`)
+    }catch(err) {
+        return err.response
+    }
+}

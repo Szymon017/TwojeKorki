@@ -11,6 +11,7 @@ import Annouce from './components/pages/Announce-info/Announce.js';
 import Favourites from './components/pages/Favourites/Favourites.js';
 import Friends from './components/pages/Friends/Friends';
 import UserGuestProfile from './components/pages/UserGuestProfile/UserGuestProfile';
+import AdminPanel from './components/pages/AdminPanel/AdminPanel';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               path="/userGuestProfil/:_id"
               element={<UserGuestProfile />}
             />
+            <Route path="/adminPanel" element={<AdminPanel/>} />
           </Routes>
         </div>
       </main>
