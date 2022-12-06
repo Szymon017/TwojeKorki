@@ -18,6 +18,7 @@ export default function OneAnnounce(props) {
   
   useEffect(()=>{
     checkForFavourite();
+    console.log(announce);
   }, [])
 
   const checkForFavourite = () => {
