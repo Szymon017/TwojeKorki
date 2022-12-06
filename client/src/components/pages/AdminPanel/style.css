@@ -1,0 +1,30 @@
+.adminPanelContainer{
+    padding: 10px;
+    font-size: 18px;
+}
+
+.adminPanelLogo {
+    padding: 20px;
+    font-size: 2rem;
+    background: rgb(245, 225, 203);
+}
+
+.adminPanelBody {
+    margin-top: 2rem;
+    background: rgb(245, 225, 203);
+}
+
+.adminPanelMenu {
+    margin-top: 2rem;
+    background: rgb(245, 225, 203);
+    text-align: center;
+    padding: 1rem;
+}
+
+.allUsersTable {
+    background-color: rgb(245, 225, 203);
+}
+
+.allUsersSingleUser {
+    border: 1px black;
+}

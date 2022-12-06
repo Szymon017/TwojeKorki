@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 export default function Navbar1() {
+  
   const logout = () => {
     const token = localStorage.getItem('token');
 
@@ -36,6 +37,7 @@ export default function Navbar1() {
           <Nav className="me-auto">
              {user ? <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
               {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
+              {user ? <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
               </Nav>
             <Nav>
               {user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""}
