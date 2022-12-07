@@ -18,6 +18,7 @@ export default function OneAnnounce(props) {
   
   useEffect(()=>{
     checkForFavourite();
+
   }, [])
 
   const checkForFavourite = () => {
@@ -80,7 +81,7 @@ export default function OneAnnounce(props) {
         <Col md={2}>
           <Row className="g-0">
             <Col md={12} className="d-flex justify-content-center ">
-              <Link to={`/announcement/${announce._id}`}>
+              <Link to={`/userGuestProfil/${announce.author._id}`}>
                 <img
                   className="img-fluid rounded-start"
                   src={img}

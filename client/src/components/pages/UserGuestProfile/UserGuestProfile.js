@@ -17,23 +17,39 @@ export default function UserGuestProfile() {
   const { _id } = params;
 
   const [user, setUser] = useState(getCurrentUser());
+  const [guestUser, setGuestUser] = useState();
   const [annoucements, setAnnoucements] = useState();
-  const [author1, setAuthor] = useState(getUserData(_id));
+
   const getAnn = async () => {
-    
+
     const result = await getUserAnnoucements(_id);
     setAnnoucements(result.data);
+    console.log(result.data);
   };
+
+  const getProfileUserData = async() => {
+    try{
+      const result = await getUserData(_id);
+      setGuestUser(result.data.data.user)
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     getAnn();
+    console.log(guestUser);
   }, [user]);
+
+  useEffect(() => {
+    getProfileUserData()
+  }, [])
 
   return (
     <div>
       <p>{_id}</p>
 
-      <h1 className="my-3 ">Profil użytkownika {user.firstName}</h1>
+      <h1 className="my-3 ">Profil użytkownika {guestUser && guestUser.firstName}</h1>
       <Container className=" my-3 justify-content-center">
         <Row className="g-0">
           <Col md={4} className="profileLeftPanel">
@@ -41,21 +57,21 @@ export default function UserGuestProfile() {
               <img src={img} className="profilePhoto"></img>
             </Row>
             <Row className="my-3">
-              <h2>{author1.firstName + ' ' + author1.lastName}</h2>
-              <h5>{author1.email}</h5>
-              <h5>{author1.telephone}</h5>
+              <h2>{guestUser && guestUser.firstName + ' ' + guestUser.lastName}</h2>
+              <h5>{guestUser && guestUser.email}</h5>
+              <h5>{guestUser && guestUser.telephone}</h5>
               <h5>
                 <span>
-                  <Rating rating={author1.rating} numReviews={author1.numReviews} />
+                  <Rating rating={guestUser && guestUser.rating} numReviews={guestUser && guestUser.numReviews} />
                 </span>
               </h5>
-              
+
             </Row>
           </Col>
 
           <Col md={7} className="profileMiddlePanel">
             <h1>Opis użytkownika</h1>
-            <h6>{author1.description}</h6>
+            <h6>{guestUser && guestUser.description}</h6>
           </Col>
           <Row>
             <Col>
