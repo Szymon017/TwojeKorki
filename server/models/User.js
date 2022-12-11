@@ -59,6 +59,15 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  status: {
+    isBanned: {
+      type: Boolean,
+    },
+    cause: {
+      type: String,
+      default: ""
+    }
+  }
 });
 
 UserSchema.statics.signup = async (
