@@ -9,7 +9,6 @@ export const addAnnouncement= async (form) => {
 };
 
 export const getAnnoucements = async(filters) => {
-  console.log(filters);
   let url="?";
   if(filters){
     if(filters.category){

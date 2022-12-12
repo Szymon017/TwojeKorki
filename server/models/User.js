@@ -39,8 +39,8 @@ const UserSchema = mongoose.Schema({
     maxLength: 9,
   },
   role: {
-    type: Number,
-    default: 0,
+    type: String,
+    default: "user",
   },
   announcements: [],
   favourites: [
@@ -93,8 +93,8 @@ UserSchema.statics.signup = async (
     !rating ||
     !numReviews ||
     !description ||
-    !telephone ||
-    !role
+    !telephone
+
   ) {
     throw Error('Pola nie mogą być puste!');
   }
@@ -111,7 +111,7 @@ UserSchema.statics.signup = async (
     numReviews,
     description,
     telephone,
-    role
+  
   );
 
   const existsEmail = await User.findOne({ email });
@@ -140,7 +140,6 @@ UserSchema.statics.signup = async (
     numReviews,
     description,
     telephone,
-    role,
   });
 
   return newUser;

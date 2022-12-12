@@ -15,7 +15,6 @@ export default function Register() {
     numReviews: 5,
     description: 'Twoj opis',
     telephone: '',
-    role: 1,
     lastSeen: Date.now(),
   };
 

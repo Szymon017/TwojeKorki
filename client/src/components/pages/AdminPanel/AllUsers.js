@@ -8,6 +8,7 @@ import {
 import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import "./style.css";
+import { getCurrentUser } from "../../../service/userDataService";
 
 export default function AllUsers() {
   const [user, setUsers] = useState();
@@ -61,6 +62,46 @@ export default function AllUsers() {
     setShowForm(id);
   }
 
+  const getPromoted = async(id, role) => {
+    const currentUser = getCurrentUser();
+    if(id != currentUser._id){
+      let newRole = {}
+      if(role === "user") {
+        newRole = {"role": "mod"};
+      }
+      if(role === "mod") {
+        newRole = {"role": "admin"};
+      }
+      
+      try{
+        const result = await updateUser(id, newRole);
+        getUsers();
+      }catch(err){
+        console.log(err);
+      }
+    }
+  }
+    
+    const degrade = async(id, role) => {
+      const currentUser = getCurrentUser();
+      if(id != currentUser._id){
+          let newRole = {}
+        if(role === "admin") {
+          newRole = {"role": "mod"};
+        }
+        if(role === "mod") {
+          newRole = {"role": "user"};
+        }
+
+        try{
+            const result = await updateUser(id, newRole);
+            getUsers();
+        }catch(err){
+            console.log(err);
+        }
+      }
+    }
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -77,9 +118,11 @@ export default function AllUsers() {
               <th scope="col">Płeć</th>
               <th scope="col">Numer telefonu</th>
               <th scope="col">Ostatnio zalogowany</th>
-              <th scope="col" colSpan={3}>
+              <th scope="col">
                 Opcje
               </th>
+              <th scope="col">Rola</th>
+              <th colSpan={2}>Działanie</th>
             </tr>
           </thead>
           <tbody className="table-striped">{user ? user.map((item) => (
@@ -107,8 +150,11 @@ export default function AllUsers() {
                     )}
                     </td>
                     <td>
-                    <Button>Zmień permisje</Button>
+                   {item.role}
+                  
                     </td>
+                    <td> <Button variant="success" onClick={()=>{getPromoted(item._id, item.role)}}>Awansuj</Button></td>
+                    <td><Button variant="dark" onClick={()=>{degrade(item._id, item.role)}}>Degraduj</Button></td>
                     <td>
                     <Button>Wejdź na profil</Button>
                     </td>

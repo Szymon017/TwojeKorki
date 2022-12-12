@@ -90,10 +90,10 @@ const login = async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-  const { email, password, firstName, lastName, sex, rating, numReviews, description, telephone, role, lastSeen } = req.body;
+  const { email, password, firstName, lastName, sex, rating, numReviews, description, telephone, lastSeen } = req.body;
 
   try {
-    const user = await User.signup(email, password, firstName, lastName, sex, rating, numReviews, description, telephone, role)
+    const user = await User.signup(email, password, firstName, lastName, sex, rating, numReviews, description, telephone)
 
     const token = createToken(user._id);
     res.status(200).json({
@@ -166,11 +166,30 @@ const updateUser = async (req, res) => {
   }
 }
 
+
+const getBannedUsers = async(req, res) => {
+  try{
+    const result = await User.find({"status.isBanned": true});
+    res.status(200).json({
+      status: 'success',
+      results: result.length,
+      data: {
+        result
+      }
+    });
+  }catch(error){
+    res.status(500).json({
+      status: 'Failed to get users',
+      message: error.message
+    });
+  }
+}
 export {
   getAllUsers,
   getUserById,
   deleteUser,
   updateUser,
   signupUser,
-  login
+  login,
+  getBannedUsers
 }
