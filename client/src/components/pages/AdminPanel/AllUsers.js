@@ -37,14 +37,17 @@ export default function AllUsers() {
   };
 
   const banUser = async (id) => {
-    const ban = { status: { isBanned: true, cause: cause.value } };
-    try{
+    const currentUser = getCurrentUser();
+    if(id != currentUser._id){
+      const ban = { status: { isBanned: true, cause: cause.value } };
+      try{
         const result = await updateUser(id, ban);
         setShowForm()
         setCause();
         getUsers();
-    }catch(err) {
+      }catch(err) {
         console.log(err);
+      }
     }
    
   };

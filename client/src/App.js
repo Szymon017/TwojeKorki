@@ -1,6 +1,6 @@
 import Navbar1 from './components/Navbar1';
 import AddNewAnnoucement from './components/pages/AddNewAnnoucement/AddNewAnnoucement';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Annoucements from './components/pages/Annoucements/Annoucements';
 import Register from './components/pages/Register/Register';
@@ -12,6 +12,7 @@ import Favourites from './components/pages/Favourites/Favourites.js';
 import Friends from './components/pages/Friends/Friends';
 import UserGuestProfile from './components/pages/UserGuestProfile/UserGuestProfile';
 import AdminPanel from './components/pages/AdminPanel/AdminPanel';
+import { getCurrentUser } from './service/userDataService';
 
 function App() {
   return (
@@ -24,19 +25,20 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/annoucements" element={<Annoucements />} />
-            <Route path="/annoucements/add" element={<AddNewAnnoucement />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/userProfile" element={<UserProfile />} />
-            <Route path="/userProfile/edit" element={<EditUserProfile />} />
             <Route path="/announcement/:_id" element={<Annouce />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/friends" element={<Friends />} />
-            <Route
-              path="/userGuestProfil/:_id"
-              element={<UserGuestProfile />}
-            />
-            <Route path="/adminPanel" element={<AdminPanel/>} />
+            <Route path="/userGuestProfil/:_id" element={<UserGuestProfile />}/>
+            <Route element={<RoleAccess roles={["user", "mod", "admin"]} />}>
+              <Route path="/annoucements/add" element={<AddNewAnnoucement />} />
+              <Route path="/userProfile/edit" element={<EditUserProfile />} />
+              <Route path="/favourites" element={<Favourites />} />
+              <Route path="/friends" element={<Friends />} />
+              <Route path="/userProfile" element={<UserProfile />} />
+            </Route>
+            <Route element={<RoleAccess roles={["admin"]} />}>
+              <Route path="/adminPanel" element={<AdminPanel/>} />
+            </Route>
           </Routes>
         </div>
       </main>
@@ -46,5 +48,17 @@ function App() {
     </div>
   );
 }
+
+const RoleAccess = ({ roles = [] }) => {
+  if(localStorage.getItem("token")){
+    const user = getCurrentUser();
+    
+    return !roles.length || roles.includes(user?.role)
+    ? <Outlet />
+    : <Navigate to="/" replace />;
+  }else{
+    return <Navigate to="/login" replace />;
+  }
+};
 
 export default App;

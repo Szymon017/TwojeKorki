@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { getCurrentUser } from '../service/userDataService';
 
 
 export default function Navbar1() {
@@ -24,7 +25,7 @@ export default function Navbar1() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setUser(token);
+      setUser(getCurrentUser());
     }
   }, []);
 
@@ -37,7 +38,7 @@ export default function Navbar1() {
           <Nav className="me-auto">
              {user ? <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
               {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
-              {user ? <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
+              {user ? user.role === "admin" && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
               </Nav>
             <Nav>
               {user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""}

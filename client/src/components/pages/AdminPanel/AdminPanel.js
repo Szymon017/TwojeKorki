@@ -35,7 +35,7 @@ export default function AdminPanel() {
                         <Button variant="dark" onClick={() => {handleMenu(options.BannedUsers)}}>Zablokowani użytkownicy</Button> 
                     </Col>
                     <Col>
-                        <Button variant="dark" onClick={() => {handleMenu(options.AllAnnoucements)}}>Wszystkie ogłoszenia</Button> 
+                        <Button variant="dark" onClick={() => {handleMenu(options.AllAnnoucements)}}>Zgłoszenia</Button> 
                     </Col>
                 </Row>
                 <Row>

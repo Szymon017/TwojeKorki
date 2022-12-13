@@ -73,7 +73,9 @@ const login = async (req, res) => {
       telephone: user.telephone,
       lastSeen: user.lastSeen,
       favourites: user.favourites,
-      friends: user.friends
+      friends: user.friends,
+      role: user.role
+
     }
     const token = createToken(userToken);
     res.status(200).json({
@@ -148,7 +150,8 @@ const updateUser = async (req, res) => {
         telephone: newUser.telephone,
         lastSeen: newUser.lastSeen,
         favourites: newUser.favourites,
-        friends: newUser.friends
+        friends: newUser.friends,
+        role: newUser.role
       }
       const token = createToken(userToken);
       //
