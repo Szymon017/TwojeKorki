@@ -13,6 +13,7 @@ import Friends from './components/pages/Friends/Friends';
 import UserGuestProfile from './components/pages/UserGuestProfile/UserGuestProfile';
 import AdminPanel from './components/pages/AdminPanel/AdminPanel';
 import { getCurrentUser } from './service/userDataService';
+import Messages from './components/pages/Messages/Messages';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/favourites" element={<Favourites />} />
               <Route path="/friends" element={<Friends />} />
               <Route path="/userProfile" element={<UserProfile />} />
+              <Route path="/messages" element={<Messages />} />
             </Route>
             <Route element={<RoleAccess roles={["admin"]} />}>
               <Route path="/adminPanel" element={<AdminPanel/>} />
