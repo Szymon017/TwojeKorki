@@ -7,7 +7,7 @@ import './style.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AllUsers from './AllUsers';
 import BannedUsers from './BannedUsers';
-import AllAnnoucements from './AllAnnoucements';
+import AllAnnoucements from './Reports';
 
 export default function AdminPanel() {
     const options = {
@@ -35,7 +35,7 @@ export default function AdminPanel() {
                         <Button variant="dark" onClick={() => {handleMenu(options.BannedUsers)}}>Zablokowani użytkownicy</Button> 
                     </Col>
                     <Col>
-                        <Button variant="dark" onClick={() => {handleMenu(options.AllAnnoucements)}}>Wszystkie ogłoszenia</Button> 
+                        <Button variant="dark" onClick={() => {handleMenu(options.AllAnnoucements)}}>Zgłoszenia</Button> 
                     </Col>
                 </Row>
                 <Row>
