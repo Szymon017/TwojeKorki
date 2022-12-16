@@ -2,7 +2,8 @@ import Message from "../models/Message.js";
 
 const getAllMessages = async (req, res) => {
     try {
-        const result = await Message.find({});
+        const result = await Message.find({})
+        console.log(result);
         res.status(200).json({
             status: "Pomyślnie pobrano wiadomości",
             results: result
@@ -17,7 +18,7 @@ const getAllMessages = async (req, res) => {
 
 const getUserMessages = async (req, res) => {
     try {
-        const result = await Message.find({userA: req.params.id});
+        const result = await Message.find({$or: [{userA: req.params.id},{userB: req.params.id}]}).populate('userB messages.sender', "firstName lastName ");;
         res.status(200).json({
             status: "Pomyślnie pobrano wiadomość",
             results: result
@@ -61,8 +62,8 @@ const createMessage = async (req, res) => {
 
 const updateMessage = async (req, res) => {
     try{
-        const newMessage = await Message.findByIdAndUpdate(req.params.id, req.body, {
-            new: true
+        const newMessage = await Message.findByIdAndUpdate(req.params.id, {$push: {messages: req.body}}, {
+            new: false
         });
         res.status(200).json({
             status: "Pomyślnie wysłano wiadomość",
