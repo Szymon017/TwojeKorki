@@ -82,10 +82,12 @@ export default function Messages(props) {
                         mess.sender._id === user._id ? (
                             <Col className='messageOwner' key={mess.message}>
                                 {mess.message}
+                                <p>{(new Date(mess.date).toISOString().replace('T', ' ').split('.')[0])}</p>
                             </Col>
                         ) : (
                             <Col className='messageStranger' key={mess.message}>
                                 {mess.message}
+                                <p>{(new Date(mess.date).toISOString().replace('T', ' ').split('.')[0])}</p>
                             </Col>
                         )
                     ))}
