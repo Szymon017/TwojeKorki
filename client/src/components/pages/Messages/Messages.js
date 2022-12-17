@@ -18,22 +18,16 @@ export default function Messages() {
             ...messageToSend,
              value
         })
-        console.log(messageToSend);
     }
 
-    const handleSubmit = async() => {
-
-
+    const handleSubmit = async(e) => {
+        e.preventDefault();
         let fullMessage = {"sender": user._id, "message": messageToSend.value}
         try{
             const result = await sendMessage(currentMessages._id, fullMessage)
             setMessageToSend();
             getAllMessages(user._id);
-            messages.map((mess)=>{
-                if(mess._id === currentMessages._id){
-                    setCurrentMessages(mess);
-                }
-            })
+            
 
         }catch(err) {
             console.log(err);
@@ -61,6 +55,14 @@ export default function Messages() {
             getAllMessages(user._id)
         }
     }, [])
+
+    useEffect(() =>{
+        currentMessages && messages?.map((mess)=>{
+            if(mess._id === currentMessages._id){
+                setCurrentMessages(mess);
+            }
+        })
+    }, [messages])
 
     return <>
         <Container>
@@ -90,6 +92,7 @@ export default function Messages() {
                 <Form>
                     <Col className='messageSend'>
                         <input type='text'
+                            value={messageToSend ? messageToSend.value : ""}
                             name="message"
                             onChange={handleChange}
                             className="form-control"></input>
