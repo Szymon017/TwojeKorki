@@ -45,6 +45,7 @@ export default function Annouce() {
     }
     try {
       const res = await sendNewMessage(messageToBeSend)
+      setContactIsTrue(false);
     } catch (err) {
       console.log(err);
     }
