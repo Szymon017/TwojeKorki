@@ -135,7 +135,7 @@ export default function AllUsers() {
                     <td>{item.email}</td>
                     <td>{item.sex}</td>
                     <td>{item.telephone}</td>
-                    <td>{item.lastSeen}</td>
+                    <td>{(new Date(item.lastSeen).toISOString().replace('T', ' ').split('.')[0])}</td>
                     <td>{item.status.isBanned?
                         <Button variant="success" onClick={() => {unbanUser(item._id);}}>
                             Odblokuj

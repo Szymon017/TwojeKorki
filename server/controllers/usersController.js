@@ -62,6 +62,8 @@ const login = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
+    const date = new Date();
+    await User.findByIdAndUpdate(user._id, {lastSeen: date});
     const userToken = {
       _id: user._id,
       email: user.email,
@@ -71,7 +73,7 @@ const login = async (req, res) => {
       numReviews: user.numReviews,
       description: user.description,
       telephone: user.telephone,
-      lastSeen: user.lastSeen,
+      lastSeen: date,
       favourites: user.favourites,
       friends: user.friends,
       role: user.role
