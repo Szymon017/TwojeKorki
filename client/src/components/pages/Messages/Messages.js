@@ -5,7 +5,8 @@ import { getUserMessages } from '../../../service/messageService';
 import { getCurrentUser } from '../../../service/userDataService';
 import { sendMessage } from '../../../service/messageService';
 
-export default function Messages() {
+export default function Messages(props) {
+    const { newMessage } = props;
     const [user, setUser] = useState();
     const [messages, setMessages] = useState();
     const [currentMessages, setCurrentMessages] = useState();
@@ -22,6 +23,8 @@ export default function Messages() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+
+        const messageExist = await getAllMessages()
         let fullMessage = {"sender": user._id, "message": messageToSend.value}
         try{
             const result = await sendMessage(currentMessages._id, fullMessage)
@@ -70,9 +73,10 @@ export default function Messages() {
                 <Col sm={3} className='messagesLeftPanel'>
 
                     {messages ? messages.map((message) => (
-                        <Row><Col  className='messageSinglePerson' onClick={() => { handleClickMessage(message) }}><h4>{message.userB.firstName + " " + message.userB.lastName}</h4><p>{message.messages[message.messages.length - 1].message}</p></Col></Row>
+                        <Row><Col  className='messageSinglePerson' onClick={() => { handleClickMessage(message) }}><h4>{user._id !== message.userB._id ? message.userB.firstName + " " + message.userB.lastName : message.userA.firstName + " " + message.userA.lastName} </h4><p>{message.messages[message.messages.length - 1].message}</p></Col></Row>
                     )) : ""}
                 </Col>
+                
                 <Col className='messagesRightPanel'>
                     {currentMessages && currentMessages.messages.map((mess) => (
                         mess.sender._id === user._id ? (

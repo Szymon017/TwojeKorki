@@ -7,14 +7,16 @@ import img from './../../../assets/images/a1.jpg';
 import { getCurrentUser } from '../../../service/userDataService';
 import { getAnnoucementById } from '../../../service/announcementService';
 import Rating from '../Rating/Rating';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
+import { sendNewMessage } from '../../../service/messageService';
 export default function Annouce() {
   const params = useParams();
   const { _id } = params;
-
+  const [contactIsTrue, setContactIsTrue] = useState(false);
   const [user, setUser] = useState(getCurrentUser());
   const [annouce, setAnnouce] = useState({});
   const [author1, setAuthor] = useState({});
+  const [message, setMessage] = useState();
 
   const getAnn = async () => {
     const result = await getAnnoucementById(_id);
@@ -22,6 +24,31 @@ export default function Annouce() {
     setAnnouce(data);
     setAuthor(data.author);
   };
+
+  const handleChange = async (e) => {
+    const { value } = e.target;
+    setMessage({
+      ...message,
+      value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const messageToBeSend = {
+      "userA": user._id,
+      "userB": author1._id,
+      "messages": {
+        "sender": user._id,
+        "message": message.value
+      }
+    }
+    try {
+      const res = await sendNewMessage(messageToBeSend)
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     getAnn();
@@ -55,9 +82,23 @@ export default function Annouce() {
             </Col>
             <Col sm={12} md={12} lg={12}>
               <div className="d-grid gap-2 mt-3">
-                <Button variant="warning" size="lg">
-                  Skontaktuj się
-                </Button>
+                {author1._id != user._id ? (
+                  !contactIsTrue ? (
+                    <Button variant="warning" size="lg" onClick={() => { setContactIsTrue(true) }}>
+                      Skontaktuj się
+                    </Button>
+                  ) : (
+                    <Form>
+                      <Col>
+                        <input type='text'
+                          name="message"
+                          onChange={handleChange}
+                          className="form-control"></input>
+                        <Button variant='success' onClick={handleSubmit}>Wyślij</Button>
+                      </Col>
+                    </Form>
+                  )
+                ) : ""}
               </div>
             </Col>
           </Row>
