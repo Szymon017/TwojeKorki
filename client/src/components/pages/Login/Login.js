@@ -67,7 +67,7 @@ export default function Login() {
 
                         <div className='button' onClick={handleSubmit}>
                             <button type="submit">
-                                Submit
+                                Zaloguj
                             </button>
                         </div>
                     </Form>

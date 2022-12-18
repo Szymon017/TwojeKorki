@@ -73,8 +73,8 @@ export default function Messages(props) {
             {messages
               ? messages.map((message) => (
                   <Row>
-                    <Col
-                      className="messageSinglePerson"
+                    <Button
+                      className="messageSinglePerson border border-dark"
                       onClick={() => {
                         handleClickMessage(message);
                       }}
@@ -91,7 +91,7 @@ export default function Messages(props) {
                       <p>
                         {message.messages[message.messages.length - 1].message}
                       </p>
-                    </Col>
+                    </Button>
                   </Row>
                 ))
               : ''}
@@ -127,39 +127,41 @@ export default function Messages(props) {
                 )
               )}
           </Col>
-
-          <Form>
-            <Row>
-              <Col sm={12} md={12} lg={12} className="messageSend">
-                <Row>
-                  <Col sm={12} md={10} lg={10}>
-                    <input
-                      type="text"
-                      value={messageToSend ? messageToSend.value : ''}
-                      name="message"
-                      onChange={handleChange}
-                      className="form-control"
-                    ></input>
-                  </Col>
-                  <Col sm={12} md={2} lg={2}>
-                    <div className="d-grid gap-2 mt-3">
-                      {currentMessages ? (
-                        <Button
-                          variant="success"
-                          size="lg"
-                          onClick={handleSubmit}
-                        >
-                          Wyślij
-                        </Button>
-                      ) : (
-                        <Button variant="dark">Wyślij</Button>
-                      )}
-                    </div>
+          
+            
+              <Form>
+                <Row className='width-max'>
+                  <Col sm={12} md={12} lg={12} className="messageSend">
+                    <Row>
+                      <Col sm={12} md={10} lg={10}>
+                        <input
+                          type="text"
+                          value={messageToSend ? messageToSend.value : ''}
+                          name="message"
+                          onChange={handleChange}
+                          className="form-control"
+                        ></input>
+                      </Col>
+                      <Col sm={12} md={2} lg={2}>
+                        <div className="d-grid gap-2 mt-3">
+                          {currentMessages ? (
+                            <Button
+                              variant="success"
+                              size="lg"
+                              onClick={handleSubmit}
+                            >
+                              Wyślij
+                            </Button>
+                          ) : (
+                            <Button variant="dark">Wyślij</Button>
+                          )}
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-          </Form>
+              </Form>
+        
         </Row>
       </Container>
     </>
