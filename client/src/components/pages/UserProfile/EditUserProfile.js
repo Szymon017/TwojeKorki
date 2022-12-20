@@ -4,19 +4,16 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { updateUser } from '../../../service/userService';
+import { getCurrentUser } from '../../../service/userDataService';
 
 export default function EditUserProfile() {
   const initialState = {
-    email: '',
-    firstName: '',
-    lastName: '',
-    sex: '',
-    description: '',
-    telephone: '',
   };
 
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const [user, setUser] = useState(getCurrentUser())
 
   const setField = (field, value) => {
     setForm({
@@ -35,29 +32,12 @@ export default function EditUserProfile() {
     const { email, firstName, lastName, sex, description, telephone } = form;
     const newErrors = {};
 
-    if (!email || email === '') newErrors.email = 'Proszę wprowadź email';
-
-    if (!sex || sex === 'Wybierz opcje...')
-      newErrors.sex = 'Proszę wybierz jedną z opcji';
-
-    if (!firstName || firstName === '')
-      newErrors.firstName = 'Proszę wprowadź imię';
-
-    if (!lastName || lastName === '')
-      newErrors.lastName = 'Proszę wprowadź nazwisko';
-    if (!description || description === '')
-      newErrors.description = 'Proszę wprowadź opis użytkownika';
-    else if (description.length > 230)
-      newErrors.description = 'Opis jest za długi (max 230 znaków)';
-
-    if (!telephone || telephone === '')
-      newErrors.telephone = 'Proszę wprowadź numer telefonu';
-    else if (telephone.length !== 9)
+    if (telephone?.length > 0 && telephone?.length< 9)
       newErrors.telephone = 'Numer telefomnu musi zawierać 9 cyfr';
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault(); //prevent post data
 
     const formErrors = validateForm();
@@ -65,6 +45,14 @@ export default function EditUserProfile() {
       setErrors(formErrors);
     } else {
       console.log('form submitted');
+      console.log(form);
+      const result = await updateUser(user._id, form);
+      if (result.data) {
+        localStorage.setItem("token", result.data.token)
+        window.location.assign('/userProfile');
+      }else{
+        //setError({error: result.message})
+    }
       {
         /* 
       const user = getCurrentUser();
