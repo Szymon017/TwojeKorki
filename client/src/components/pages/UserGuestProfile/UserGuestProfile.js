@@ -12,6 +12,7 @@ import OneAnnounce from '../Annoucements/OneAnnounce';
 import RatingCom from '../RatingCom/RatingCom';
 import RatingForm from '../RatingCom/RatingForm';
 import { getUserReviews } from '../../../service/reviewsService';
+import './style.css';
 
 export default function UserGuestProfile() {
   const params = useParams();
@@ -33,7 +34,7 @@ export default function UserGuestProfile() {
     try{
       const result = await getUserData(_id);
       setGuestUser(result.data.data.user)
-      await getReviews();
+      getReviews();
 
     }catch(err){
       console.log(err);
@@ -71,6 +72,8 @@ export default function UserGuestProfile() {
               <h5>{guestUser && guestUser.telephone}</h5>
               <h5>
                 <span>
+                  <p>{guestUser?.rating}</p>
+                  <p>{guestUser?.numReviews}</p>
                   <Rating rating={guestUser && guestUser.rating} numReviews={guestUser && guestUser.numReviews} />
                 </span>
               </h5>
@@ -98,8 +101,9 @@ export default function UserGuestProfile() {
               )}
             </Col>
           </Row>
-          <Row>
-            <h1 className="my-3">Opinie o użykowniku</h1>
+          <h1 className="my-3">Opinie o użykowniku</h1>
+          <Row className="userGuestProfileReviews">
+
             {annoucements ? (
               annoucements.map((ann) => (
                 <Row key={ann.title} className="g-0">

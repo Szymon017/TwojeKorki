@@ -61,7 +61,6 @@ export default function RatingForm() {
 
   return (
     <div className="addRating my-3">
-      <p>{_id}</p>
       <h1 className="my-3  ms-3">Ocena</h1>
       <Container>
         <Form>

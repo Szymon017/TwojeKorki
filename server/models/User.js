@@ -90,8 +90,6 @@ UserSchema.statics.signup = async (
     !firstName ||
     !lastName ||
     !sex ||
-    !rating ||
-    !numReviews ||
     !description ||
     !telephone
 

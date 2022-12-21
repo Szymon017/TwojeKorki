@@ -41,7 +41,7 @@ export default function Navbar1() {
               {user ? user.role === "admin" && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
               </Nav>
             <Nav>
-              {user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""}
+              {/*user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""*/}
               {user ? <CustomLink to="/messages"> Wiadomości <i class="bi bi-chat-dots-fill"/></CustomLink> : ""}
               {user ? <CustomLink to="/favourites">Ulubione <i class="bi bi-heart-fill"/> </CustomLink> : ""}
               {user ? <CustomLink to="/userProfile">Mój profil <i class="bi bi-person-circle"/> </CustomLink>:''}

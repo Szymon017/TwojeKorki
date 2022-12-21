@@ -48,7 +48,7 @@ export default function OneAnnInProf(props) {
               <Card.Text> {announce.price} zł/godz</Card.Text>
             </Col>
             <Col className="text-end">
-              <Link to={`/announcement/${announce.title}`}>
+              <Link to={`/announcement/${announce._id}`}>
                 <Button variant="warning">Otwórz</Button>
               </Link>{' '}
               <Link to={`/annoucements/edit/${announce._id}`}>

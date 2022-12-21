@@ -1,0 +1,6 @@
+.userGuestProfileReviews {
+    margin-top: 2rem;
+    overflow-y:scroll;
+    height: 20rem;
+    width: 100%;
+}

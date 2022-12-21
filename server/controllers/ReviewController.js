@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Review from "../models/Review.js";
+import User from "../models/User.js";
 
 const getAllReviews = async (req, res) => {
     try {
@@ -50,8 +51,11 @@ const sendReview = async (req, res) => {
                 message: "Pola nie mogą być puste"
             })
         }
-
-        const result = Review.create({ author, user, message, rate })
+        console.log(user);
+        const userResult = await User.findOneAndUpdate({_id: user}, {$inc : {'numReviews':1, 'rating': rate}});
+        
+        
+        const result = await Review.create({ author, user, message, rate })
         res.status(200).json({
             status: "Pomyślnie dodano ocenę",
             data: result

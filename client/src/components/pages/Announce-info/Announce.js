@@ -57,7 +57,6 @@ export default function Annouce() {
 
   return (
     <div>
-      <h1> {_id}</h1>
       <Card style={{ background: 'rgb(245, 225, 203)' }}>
         <Container className="w-auto p-3 AnnounceInfo my-3 justify-content-center">
           <Row className="g-0  w-100 p-4">

@@ -164,7 +164,7 @@ const updateAnnoucement = async (req, res) => {
 const getUserAnnoucements = async (req, res) => {
   const id = req.params.id;
   try {
-    const result = await Annoucement.find({ author: id });
+    const result = await Annoucement.find({ author: id }).populate("author");
     res.send(result);
   } catch (err) {
     res.status(500).json({
