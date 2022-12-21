@@ -7,23 +7,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import categories from '../../../assets/category/categories';
-import { addAnnouncement } from '../../../service/announcementService';
-import { getCurrentUser } from '../../../service/userDataService';
+import { updateAnnoucement } from '../../../service/announcementService';
+import { useParams } from 'react-router-dom';
 
 export default function EditAnnoucement() {
+  
   const initialState = {
-    author: '',
-    title: '',
-    option: '',
-    category: '',
-    location: '',
-    description: '',
-    price: 0,
+
     date: Date.now(),
   };
 
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const params = useParams();
+  const { id } = params;
 
   const setField = (field, value) => {
     setForm({
@@ -39,26 +36,14 @@ export default function EditAnnoucement() {
   };
 
   const validateForm = () => {
-    const { title, option, category, location, description, price } = form;
+    const {description, price } = form;
     const newErrors = {};
 
-    if (!title || title === '') newErrors.title = 'Proszę wprowadź tytuł';
 
-    if (!option || option === 'Wybierz opcje...')
-      newErrors.option = 'Proszę wybierz jedną z opcji';
-
-    if (!category || category === '')
-      newErrors.category = 'Proszę wybierz kategorie';
-
-    if (!location || location === '')
-      newErrors.location = 'Proszę podaj lokalizację';
-    if (!description || description === '')
-      newErrors.description = 'Proszę wprowadź opis ogłoszenia';
-    else if (description.length > 230)
+    if (description?.length > 230)
       newErrors.description = 'Opis jest za długi (max 230 znaków)';
 
-    if (!price || price === '') newErrors.price = 'Wprowadź cene';
-    else if (price < 1) newErrors.price = 'Cena musi byc wieksza od zera';
+    if (price < 0) newErrors.price = 'Cena musi byc wieksza od zera';
     return newErrors;
   };
 
@@ -66,19 +51,16 @@ export default function EditAnnoucement() {
     e.preventDefault(); //prevent post data
 
     const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
+    if (Object.keys(formErrors)?.length > 0) {
       setErrors(formErrors);
     } else {
-      console.log('form submitted');
-      const user = getCurrentUser();
-      form.author = user._id;
-      const result = addAnnouncement(form);
+      const result = updateAnnoucement(id, form);
       result.then((res) => {
         console.log(res);
         if (res.error) {
           console.log(res.error);
         } else {
-          window.location.assign('/annoucements');
+          window.location.assign('/userProfile');
         }
       });
     }

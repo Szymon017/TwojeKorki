@@ -51,7 +51,7 @@ export default function OneAnnInProf(props) {
               <Link to={`/announcement/${announce.title}`}>
                 <Button variant="warning">Otwórz</Button>
               </Link>{' '}
-              <Link to={'/annoucements/edit'}>
+              <Link to={`/annoucements/edit/${announce._id}`}>
                 <Button variant="warning">
                   Edytuj <i class="bi bi-pencil"></i>
                 </Button>

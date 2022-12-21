@@ -6,7 +6,7 @@ router.get('/', getAllAnnoucements);
 router.get('/:id', getAnnoucementById);
 router.get('/userAnnoucements/:id', getUserAnnoucements);
 router.post('/',addNewAnnoucement);
-router.patch('/:id', updateAnnoucement);
+router.put('/:id', updateAnnoucement);
 router.delete('/:id', deleteAnnoucement);
 
 export default router;
