@@ -99,18 +99,7 @@ UserSchema.statics.signup = async (
   if (!validator.isEmail(email)) {
     throw Error('Błędny adres email');
   }
-  console.log(
-    email,
-    password,
-    firstName,
-    lastName,
-    sex,
-    rating,
-    numReviews,
-    description,
-    telephone,
 
-  );
 
   const existsEmail = await User.findOne({ email });
   const existsPhone = await User.findOne({ telephone });
