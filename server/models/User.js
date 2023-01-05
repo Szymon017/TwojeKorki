@@ -109,7 +109,7 @@ UserSchema.statics.signup = async (
     numReviews,
     description,
     telephone,
-  
+
   );
 
   const existsEmail = await User.findOne({ email });
