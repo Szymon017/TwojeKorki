@@ -133,7 +133,7 @@ export default function AllUsers() {
                     <td>{item.firstName}</td>
                     <td>{item.lastName}</td>
                     <td>{item.email}</td>
-                    <td>{item.sex}</td>
+                    <td>{item.sex === 'male' ? "Mężczyzna":"Kobieta"}</td>
                     <td>{item.telephone}</td>
                     <td>{(new Date(item.lastSeen).toISOString().replace('T', ' ').split('.')[0])}</td>
                     <td>{item.status.isBanned?
