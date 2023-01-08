@@ -96,7 +96,7 @@ const addNewAnnoucement = async (req, res) => {
       !option ||
       !location
     ) {
-      res.send(500).json({
+      res.status(500).json({
         message: 'Prosze uzupełnić niezbędne pola',
       });
     }
@@ -139,6 +139,7 @@ const deleteAnnoucement = async (req, res) => {
 };
 
 const updateAnnoucement = async (req, res) => {
+  console.log(req.body);
   try {
     const newAnnoucement = await Annoucement.findByIdAndUpdate(
       req.params.id,
@@ -163,8 +164,7 @@ const updateAnnoucement = async (req, res) => {
 const getUserAnnoucements = async (req, res) => {
   const id = req.params.id;
   try {
-    const result = await Annoucement.find({ author: id });
-    console.log(result);
+    const result = await Annoucement.find({ author: id }).populate("author");
     res.send(result);
   } catch (err) {
     res.status(500).json({

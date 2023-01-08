@@ -53,3 +53,12 @@ export const getAnnoucementById = async(id) => {
     return err.message;
   }
 }
+
+export const updateAnnoucement = async(id, data) => {
+  try {
+    console.log(data);
+      return await axios.put(`http://localhost:5000/annoucements/${id}`, data)
+  } catch (err) {
+    return err.message;
+  }
+}

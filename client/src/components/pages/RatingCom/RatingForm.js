@@ -5,10 +5,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { getCurrentUser } from '../../../service/userDataService';
+import { useParams } from 'react-router-dom';
+import { addNewReview } from '../../../service/reviewsService';
 
 export default function RatingForm() {
+  const params = useParams();
+  const _id = params._id;
   const initialState = {
-    author: '',
+    author: getCurrentUser()._id,
+    user: _id,
     option: '',
     com: '',
   };
@@ -37,6 +42,8 @@ export default function RatingForm() {
     if (!com || com === '') newErrors.com = 'Proszę wprowadź komentarz';
     else if (com.length > 230)
       newErrors.com = 'Komentarz jest za długi (max 230 znaków)';
+
+      return newErrors;
   };
 
   const handleSubmit = (e) => {
@@ -47,7 +54,8 @@ export default function RatingForm() {
       setErrors(formErrors);
     } else {
       console.log('form submitted');
-      console.log(form);
+      addNewReview(form);
+
     }
   };
 

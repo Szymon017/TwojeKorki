@@ -11,8 +11,8 @@ export default function Register() {
     firstName: '',
     lastName: '',
     sex: 'Male',
-    rating: 4,
-    numReviews: 5,
+    rating: 0,
+    numReviews: 0,
     description: 'Twoj opis',
     telephone: '',
     lastSeen: Date.now(),
@@ -60,8 +60,10 @@ export default function Register() {
     }
     if (!values.password) {
       errors.password = 'Hasło nie może być puste';
-    } else if (values.password.length <= 6)
+    } else if (values.password.length <= 6) {
       errors.password = 'Hasło musi zawierać co najmniej 6 znaków';
+    } else if (values.password !== values.password1)
+      errors.password = 'Hasła muszą być takie same!';
     if (!values.firstName) {
       errors.firstName = 'Imię nie może być puste';
     }
@@ -73,6 +75,7 @@ export default function Register() {
     } else if (values.telephone.length !== 9) {
       errors.telephone = 'Numer telefonu musi zawierać 9 cyfr';
     }
+
     return errors;
   };
 
@@ -81,7 +84,7 @@ export default function Register() {
       <h1 className="row-md-3 text-center">Rejestracja</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Adres email</label>
+          <label className="mt-4 fw-bold">Adres email</label>
           <p className="text-danger">{error.email}</p>
           <input
             name="email"
@@ -92,7 +95,7 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Hasło</label>
+          <label className="mt-4 fw-bold">Hasło</label>
           <p className="text-danger">{error.password}</p>
           <input
             name="password"
@@ -103,7 +106,18 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Imię</label>
+          <label className="fw-bold">Powtórz hasło</label>
+          <p className="text-danger"></p>
+          <input
+            name="password1"
+            type="password"
+            required
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label className="mt-4 fw-bold">Imię</label>
           <p className="text-danger">{error.firstName}</p>
           <input
             name="firstName"
@@ -114,7 +128,7 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Nazwisko</label>
+          <label className="fw-bold">Nazwisko</label>
           <p className="text-danger">{error.lastName}</p>
           <input
             name="lastName"
@@ -124,7 +138,7 @@ export default function Register() {
             className="form-control"
           />
         </div>
-        <label>Płeć</label>
+        <label className="fw-bold">Płeć</label>
         <div className="form-check">
           <label>Kobieta</label>
           <input
@@ -148,7 +162,7 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Numer telefonu</label>
+          <label className="fw-bold">Numer telefonu</label>
           <p className="text-danger">{error.telephone}</p>
           <input
             name="telephone"
@@ -158,7 +172,11 @@ export default function Register() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="btn btn-primary mt-4"
+          onClick={handleSubmit}
+        >
           Zarejestruj się
         </button>
       </form>
