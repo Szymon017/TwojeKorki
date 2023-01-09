@@ -9,14 +9,18 @@ import { getAnnoucementById } from '../../../service/announcementService';
 import Rating from '../Rating/Rating';
 import { Button, Container, Form } from 'react-bootstrap';
 import { sendNewMessage } from '../../../service/messageService';
+import { addNewReport } from '../../../service/reportService';
+
 export default function Annouce() {
   const params = useParams();
   const { _id } = params;
   const [contactIsTrue, setContactIsTrue] = useState(false);
+  const [reportIsTrue, setReportIsTrue] = useState(false);
   const [user, setUser] = useState(getCurrentUser());
   const [annouce, setAnnouce] = useState({});
   const [author1, setAuthor] = useState({});
   const [message, setMessage] = useState();
+  const [reportMessage, setReportMessage] = useState();
 
   const getAnn = async () => {
     const result = await getAnnoucementById(_id);
@@ -29,6 +33,14 @@ export default function Annouce() {
     const { value } = e.target;
     setMessage({
       ...message,
+      value
+    })
+  }
+
+  const handleChangeReport = async (e) => {
+    const { value } = e.target;
+    setReportMessage({
+      ...reportMessage,
       value
     })
   }
@@ -54,6 +66,23 @@ export default function Annouce() {
   useEffect(() => {
     getAnn();
   }, [user]);
+
+
+  const report = (e) => {
+  e.preventDefault();
+  
+  const reportObj = {
+    reportingPerson: user._id,
+    annoucementId: _id,
+    reportMessage: reportMessage.value
+  }
+
+  setReportIsTrue(false);
+  const result = addNewReport(reportObj);
+  result.then((x) => {
+    console.log(x);
+  })
+  }
 
   return (
     <div>
@@ -99,6 +128,18 @@ export default function Annouce() {
                     </Form>
                   )
                 ) : ""}
+                {!reportIsTrue ? (<Button variant='danger' onClick={() => {setReportIsTrue(true)}}>Zgłoś ogłoszenie</Button>
+                ) : (
+                  <Form>
+                      <Col>
+                        <input type='text'
+                          name="report"
+                          onChange={handleChangeReport}
+                          className="form-control"></input>
+                        <Button variant='danger' onClick={report}>Zgłoś</Button>
+                      </Col>
+                    </Form>
+                )}
               </div>
             </Col>
           </Row>

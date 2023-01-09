@@ -7,13 +7,13 @@ import './style.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AllUsers from './AllUsers';
 import BannedUsers from './BannedUsers';
-import AllAnnoucements from './AllAnnoucements';
+import Reports from './Reports';
 
 export default function AdminPanel() {
     const options = {
         AllUsers: "AllUsers",
         BannedUsers: "BannedUsers",
-        AllAnnoucements: "AllAnnoucements"
+        Reports: "Reports"
     }
     const [tab, setTab] = useState(options.AllUsers);
 
@@ -35,14 +35,14 @@ export default function AdminPanel() {
                         <Button variant="dark" onClick={() => {handleMenu(options.BannedUsers)}}>Zablokowani użytkownicy</Button> 
                     </Col>
                     <Col>
-                        <Button variant="dark" onClick={() => {handleMenu(options.AllAnnoucements)}}>Zgłoszenia</Button> 
+                        <Button variant="dark" onClick={() => {handleMenu(options.Reports)}}>Zgłoszenia</Button> 
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         {tab == options.AllUsers && (<AllUsers />)}
                         {tab == options.BannedUsers && (<BannedUsers />)}
-                        {tab == options.AllAnnoucements && (<AllAnnoucements />)}
+                        {tab == options.Reports && (<Reports />)}
                     </Col>
                 </Row>
             </Container>

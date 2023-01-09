@@ -57,7 +57,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span> {numReviews} oceny</span>
+      <span> {numReviews<5 ? <p>{numReviews} ocen</p> : <p> {numReviews} ocen</p>} </span>
     </div>
   );
 }

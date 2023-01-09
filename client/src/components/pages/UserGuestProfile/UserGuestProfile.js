@@ -72,8 +72,6 @@ export default function UserGuestProfile() {
               <h5>{guestUser && guestUser.telephone}</h5>
               <h5>
                 <span>
-                  <p>{guestUser?.rating}</p>
-                  <p>{guestUser?.numReviews}</p>
                   <Rating rating={guestUser && guestUser.rating} numReviews={guestUser && guestUser.numReviews} />
                 </span>
               </h5>
