@@ -111,7 +111,7 @@ export default function AllUsers() {
   return (
     <>
       <div>
-        <h1>All Users</h1>
+        <h1>Wszyscy użytkownicy</h1>
         <Table striped bordered hover>
           <thead className="thead-dark">
             <tr>

@@ -2,7 +2,7 @@ import Report from "../models/Report.js";
 
 const getAllReports = async(req, res) => {
     try {
-        const result = await Report.find({});
+        const result = await Report.find({}).populate("reportingPerson");
         res.status(200).json({
             status: "Pomyślnie pobrano wszystkie zgłoszenia",
             result: result

@@ -40,7 +40,7 @@ function App() {
               <Route path="/userProfile" element={<UserProfile />} />
               <Route path="/messages" element={<Messages />} />
             </Route>
-            <Route element={<RoleAccess roles={["admin"]} />}>
+            <Route element={<RoleAccess roles={["admin", "mod"]} />}>
               <Route path="/adminPanel" element={<AdminPanel/>} />
             </Route>
           </Routes>

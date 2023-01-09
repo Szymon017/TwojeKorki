@@ -38,7 +38,7 @@ export default function Navbar1() {
           <Nav className="me-auto">
              {user ? <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
               {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
-              {user ? user.role === "admin" && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
+              {user ? (user.role === "admin" || user.role ==="mod") && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
               </Nav>
             <Nav>
               {/*user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""*/}

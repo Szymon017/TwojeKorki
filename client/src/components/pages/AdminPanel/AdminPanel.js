@@ -8,6 +8,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import AllUsers from './AllUsers';
 import BannedUsers from './BannedUsers';
 import Reports from './Reports';
+import { getCurrentUser } from '../../../service/userDataService';
 
 export default function AdminPanel() {
     const options = {
@@ -16,6 +17,7 @@ export default function AdminPanel() {
         Reports: "Reports"
     }
     const [tab, setTab] = useState(options.AllUsers);
+    const [user, setUser] = useState(getCurrentUser());
 
 
     const handleMenu = (option) => {
@@ -28,20 +30,24 @@ export default function AdminPanel() {
                     <Col>Admin panel</Col>
                 </Row>
                 <Row className='adminPanelMenu'>
+                    {user?.role=="admin" && 
                     <Col>
                         <Button variant="dark" onClick={() => {handleMenu(options.AllUsers)}}>Wszyscy użytkownicy</Button> 
-                    </Col>
+                    </Col> 
+                    }
+                    {user?.role=="admin" &&
                     <Col>
                         <Button variant="dark" onClick={() => {handleMenu(options.BannedUsers)}}>Zablokowani użytkownicy</Button> 
                     </Col>
+                    }
                     <Col>
                         <Button variant="dark" onClick={() => {handleMenu(options.Reports)}}>Zgłoszenia</Button> 
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        {tab == options.AllUsers && (<AllUsers />)}
-                        {tab == options.BannedUsers && (<BannedUsers />)}
+                        {tab == options.AllUsers && user?.role==="admin" && (<AllUsers />)}
+                        {tab == options.BannedUsers && user?.role==="admin" && (<BannedUsers />)}
                         {tab == options.Reports && (<Reports />)}
                     </Col>
                 </Row>
