@@ -15,3 +15,11 @@ export const addNewReport = async(data) => {
         return error
     }
 }
+
+export const deleteReport = async(id) => {
+    try{
+        return await axios.delete(`http://localhost:5000/reports/${id}`)
+    } catch( error ) {
+        return error;
+    }
+}

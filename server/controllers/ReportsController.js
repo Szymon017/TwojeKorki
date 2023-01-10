@@ -2,7 +2,7 @@ import Report from "../models/Report.js";
 
 const getAllReports = async(req, res) => {
     try {
-        const result = await Report.find({}).populate("reportingPerson");
+        const result = await Report.find({}).populate("reportingPerson annoucementId");
         res.status(200).json({
             status: "Pomyślnie pobrano wszystkie zgłoszenia",
             result: result
@@ -40,6 +40,20 @@ const createNewReport = async(req, res) => {
     }
 }
 
+const deleteReport = async(req, res) => {
+    try {
+        const result = await Report.findByIdAndDelete({ _id: req.params.id });
+        res.status(200).json({
+            status: "Pomyślnie usunięto zgłoszenie"
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: "Nie udało się usunąć zgłoszenia",
+            message: error.message
+        })
+    }
+}
+
 const getReport = async(req, res) => {
 
 }
@@ -47,5 +61,6 @@ const getReport = async(req, res) => {
 export {
     getAllReports,
     createNewReport,
-    getReport
+    getReport, 
+    deleteReport
 }

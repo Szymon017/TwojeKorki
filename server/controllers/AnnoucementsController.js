@@ -1,5 +1,5 @@
 import Annoucement from '../models/Annoucement.js';
-
+import Report from '../models/Report.js';
 
 const getAllAnnoucements = async (req, res) => {
   const page = req.query.p || 0;
@@ -10,11 +10,9 @@ const getAllAnnoucements = async (req, res) => {
   if (req.query.category) {
     query.category = req.query.category;
   }
-
   if (req.query.location) {
     query.location = req.query.location;
   }
-
   if (req.query.option) {
     query.option = req.query.option;
   }
@@ -31,9 +29,6 @@ const getAllAnnoucements = async (req, res) => {
     const str = req.query.sortOption.split(':');
     sort[str[0]] = str[1] === 'desc' ? -1:1;
   }
-
-
-  console.log(JSON.stringify(sort));
 
   try {
     const annoucements = await Annoucement.find(query)
@@ -124,6 +119,10 @@ const addNewAnnoucement = async (req, res) => {
 
 const deleteAnnoucement = async (req, res) => {
   try {
+    const exist = await Report.find({annoucementId: req.params.id});
+    if(exist) {
+      const deleteExisting = await Report.deleteMany({annoucementId: req.params.id});
+    }
     const result = await Annoucement.findByIdAndDelete({ _id: req.params.id });
     if (!result) throw Error('No annoucement found!');
     res.status(201).json({

@@ -10,6 +10,7 @@ import Rating from '../Rating/Rating';
 import { Button, Container, Form } from 'react-bootstrap';
 import { sendNewMessage } from '../../../service/messageService';
 import { addNewReport } from '../../../service/reportService';
+import { deleteAnnoucement } from '../../../service/announcementService';
 
 export default function Annouce() {
   const params = useParams();
@@ -69,19 +70,24 @@ export default function Annouce() {
 
 
   const report = (e) => {
-  e.preventDefault();
-  
-  const reportObj = {
-    reportingPerson: user._id,
-    annoucementId: _id,
-    reportMessage: reportMessage.value
+    e.preventDefault();
+
+    const reportObj = {
+      reportingPerson: user._id,
+      annoucementId: _id,
+      reportMessage: reportMessage.value
+    }
+
+    setReportIsTrue(false);
+    const result = addNewReport(reportObj);
+    result.then((x) => {
+      console.log(x);
+    })
   }
 
-  setReportIsTrue(false);
-  const result = addNewReport(reportObj);
-  result.then((x) => {
-    console.log(x);
-  })
+  const deleteAnnouce = async() => {
+      deleteAnnoucement(_id);
+      window.location.assign('/annoucements');
   }
 
   return (
@@ -92,6 +98,7 @@ export default function Annouce() {
             <Col sm={12} md={12} lg={12} className="fs-5 fw-bold">
               <Card.Title>
                 <h1>{annouce.title}</h1>
+                <p>{user?.role === 'admin' || user?.role === 'mod' ? <Button variant="dark" onClick={() => {deleteAnnouce()}}>Usuń ogłoszenie</Button> : ""}</p>
               </Card.Title>
             </Col>
             <Col sm={12} md={12} lg={12}>
@@ -128,17 +135,17 @@ export default function Annouce() {
                     </Form>
                   )
                 ) : ""}
-                {!reportIsTrue ? (<Button variant='danger' onClick={() => {setReportIsTrue(true)}}>Zgłoś ogłoszenie</Button>
+                {!reportIsTrue ? (<Button variant='danger' onClick={() => { setReportIsTrue(true) }}>Zgłoś ogłoszenie</Button>
                 ) : (
                   <Form>
-                      <Col>
-                        <input type='text'
-                          name="report"
-                          onChange={handleChangeReport}
-                          className="form-control"></input>
-                        <Button variant='danger' onClick={report}>Zgłoś</Button>
-                      </Col>
-                    </Form>
+                    <Col>
+                      <input type='text'
+                        name="report"
+                        onChange={handleChangeReport}
+                        className="form-control"></input>
+                      <Button variant='danger' onClick={report}>Zgłoś</Button>
+                    </Col>
+                  </Form>
                 )}
               </div>
             </Col>
