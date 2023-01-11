@@ -76,7 +76,8 @@ const login = async (req, res) => {
       lastSeen: date,
       favourites: user.favourites,
       friends: user.friends,
-      role: user.role
+      role: user.role,
+      status: user.status
 
     }
     const token = createToken(userToken);
@@ -153,7 +154,9 @@ const updateUser = async (req, res) => {
         lastSeen: newUser.lastSeen,
         favourites: newUser.favourites,
         friends: newUser.friends,
-        role: newUser.role
+        role: newUser.role,
+        status: newUser.status
+
       }
       const token = createToken(userToken);
       //

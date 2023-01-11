@@ -32,19 +32,19 @@ export default function Navbar1() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">TwojeKorki</Navbar.Brand>
+        <Navbar.Brand href="/annoucements">TwojeKorki</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-             {user ? <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink> : ''}
-              {user ? <CustomLink to="/annoucements">Ogłoszenia</CustomLink> : ''}
-              {user ? (user.role === "admin" || user.role ==="mod") && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>:""}
+             {user &&  <CustomLink  to="/annoucements/add">Dodaj ogłoszenie</CustomLink>}
+              {<CustomLink to="/annoucements">Ogłoszenia</CustomLink>}
+              {user && (user.role === "admin" || user.role ==="mod") && <CustomLink to="/adminPanel"> Panel zarządzania </CustomLink>}
               </Nav>
             <Nav>
               {/*user ? <CustomLink to="/friends">Znajomi <i class="bi bi-people-fill"/> </CustomLink> : ""*/}
-              {user ? <CustomLink to="/messages"> Wiadomości <i class="bi bi-chat-dots-fill"/></CustomLink> : ""}
-              {user ? <CustomLink to="/favourites">Ulubione <i class="bi bi-heart-fill"/> </CustomLink> : ""}
-              {user ? <CustomLink to="/userProfile">Mój profil <i class="bi bi-person-circle"/> </CustomLink>:''}
+              {user && <CustomLink to="/messages"> Wiadomości <i class="bi bi-chat-dots-fill"/></CustomLink>}
+              {user && <CustomLink to="/favourites">Ulubione <i class="bi bi-heart-fill"/> </CustomLink>}
+              {user && <CustomLink to="/userProfile">Mój profil <i class="bi bi-person-circle"/> </CustomLink>}
               {user ? <CustomLink to="/logout" onClick={logout}>Wyloguj się <i class="bi bi-power"/> </CustomLink> : <CustomLink to="login">Zaloguj się</CustomLink> }
               
             </Nav>

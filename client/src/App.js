@@ -15,6 +15,7 @@ import AdminPanel from './components/pages/AdminPanel/AdminPanel';
 import { getCurrentUser } from './service/userDataService';
 import Messages from './components/pages/Messages/Messages';
 import EditAnnoucement from './components/pages/EditAnnoucement/EditAnnoucement';
+import Banned from './Banned.js';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <main>
         <div className="container mt-3">
           <Routes>
+            <Route path='/banned' element={<Banned/>}/>
             <Route path="/" element={<Home />} />
             <Route path="/annoucements" element={<Annoucements />} />
             <Route path="/register" element={<Register />} />
@@ -56,10 +58,12 @@ function App() {
 const RoleAccess = ({ roles = [] }) => {
   if(localStorage.getItem("token")){
     const user = getCurrentUser();
-    
+    if(user.status.isBanned){
+      return <Navigate to="/banned" replace />;
+    }
     return !roles.length || roles.includes(user?.role)
     ? <Outlet />
-    : <Navigate to="/" replace />;
+    : <Navigate to="/annoucements" replace />;
   }else{
     return <Navigate to="/login" replace />;
   }

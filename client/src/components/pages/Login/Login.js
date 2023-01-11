@@ -27,7 +27,7 @@ export default function Login() {
     const result = await login(user);
     if (result.data) {
       localStorage.setItem('token', result.data.token);
-      window.location.assign('/');
+      window.location.assign('/annoucements');
     } else {
       setError({ error: result.message });
     }

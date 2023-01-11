@@ -92,6 +92,9 @@ export default function OneAnnounce(props) {
             <Col md={12} className="d-flex justify-content-center">
               {announce.author ? (<b> {announce.author.firstName + " " + announce.author.lastName}</b>) : ""}
             </Col>
+            <Col md={12} className="d-flex justify-content-center">
+              <Card.Text>{announce.option === "Teacher" ? <p>Korepetytor</p>:<p>Uczeń</p>} </Card.Text>
+              </Col>
           </Row>
         </Col>
         <Col md={10}>
@@ -105,16 +108,19 @@ export default function OneAnnounce(props) {
               </Col>
               <Col md={6} className=" fw-bold">
                 <Card.Text>{announce.location} </Card.Text>
+                
               </Col>
               <Col md={6} className="text-end fs-5 fw-bold ">
                 {' '}
                 <Card.Text> {announce.price} zł/godz</Card.Text>
+                
               </Col>
 
               <Col className="">
                 <Link to={`/announcement/${announce._id}`}>
                   <Button variant="warning">Wejdz do ogloszenia</Button>
                 </Link>
+                
                 {option? (
                   <Button variant="success" onClick={() => {deleteFromFavourite(announce._id)}}>
                   <i class="bi bi-heart-fill"></i>
